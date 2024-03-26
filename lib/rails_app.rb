@@ -3,6 +3,7 @@
 require_relative "rails_app/version"
 
 module RailsApp
-  class Error < StandardError; end
-  # Your code goes here...
+  autoload :App, "rails_app/rails_app"
+  autoload :CLI, "rails_app/cli"
+  autoload :Error, "rails_app/error"
 end
