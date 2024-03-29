@@ -5,5 +5,6 @@ require_relative "rails_app/version"
 module RailsApp
   autoload :App, "rails_app/rails_app"
   autoload :CLI, "rails_app/cli"
+  autoload :Command, "rails_app/command"
   autoload :Error, "rails_app/error"
 end

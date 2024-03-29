@@ -31,4 +31,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "bootsnap" # used by rails new
+  spec.add_dependency "thor", "~> 1.3", ">= 1.3.1"
+  spec.add_dependency "tty-prompt"
 end
