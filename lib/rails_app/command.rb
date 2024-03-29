@@ -14,8 +14,8 @@ module RailsApp
     end
 
     def run
-      command = "rails new #{@app_name} #{asset_management} #{javascript_bundling} #{@styling} #{testing_framework} --no-rc --skip-spring"
-
+      command = "rails new #{@app_name} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} --no-rc --skip-spring"
+      puts command
       system(command)
     end
 
@@ -33,6 +33,7 @@ module RailsApp
 
     def styling_framework
       if @bundling == "esbuild" && @styling != "none"
+        puts "HERE: #{@styling}"
         "--css #{@styling}"
       end
     end
