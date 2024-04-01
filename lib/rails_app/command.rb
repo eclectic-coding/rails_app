@@ -4,10 +4,9 @@ module RailsApp
   class Command
     attr_reader :app_name, :bundling, :assets
 
-    def initialize(app_name:, assets:, styling:)
+    def initialize(app_name:, assets:)
       @app_name = app_name
       @assets = assets
-      @styling = styling
     end
 
     def template
@@ -33,9 +32,7 @@ module RailsApp
     end
 
     def styling_framework
-      if @bundling == "esbuild" && @styling != "none"
-        "--css #{@styling}"
-      end
+      "--css bootstrap"
     end
 
     def testing_framework
