@@ -4,17 +4,18 @@ module RailsApp
   class Command
     attr_reader :app_name, :bundling, :assets
 
-    def initialize(app_name:, spring:, assets:, bundling:, styling:, testing:)
+    def initialize(app_name:, assets:, styling:)
       @app_name = app_name
-      @spring = spring
       @assets = assets
-      @bundling = bundling
       @styling = styling
-      @testing = testing
+    end
+
+    def template
+      File.join(__dir__, "template", "template.rb")
     end
 
     def run
-      command = "rails new #{@app_name} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} --no-rc --skip-spring"
+      command = "rails new #{@app_name} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} --no-rc -m #{template} #{skip_spring}"
       puts command
       system(command)
     end
