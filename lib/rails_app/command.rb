@@ -15,17 +15,17 @@ module RailsApp
     end
 
     def run
-      command = "rails new #{@app_name} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} --no-rc -m #{template} #{skip_spring}"
+      command = "rails new #{@app_name} --no-rc #{skip_spring} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} -m #{template}"
       puts command
       system(command)
     end
 
     def skip_spring
-      "--skip-spring" unless @spring == "yes"
+      "--skip-spring"
     end
 
     def javascript_bundling
-      "-j #{bundling}" unless bundling == "importmap"
+      "-j esbuild"
     end
 
     def asset_management
@@ -34,13 +34,12 @@ module RailsApp
 
     def styling_framework
       if @bundling == "esbuild" && @styling != "none"
-        puts "HERE: #{@styling}"
         "--css #{@styling}"
       end
     end
 
     def testing_framework
-      "-T" unless @testing == "minitest"
+      "-T"
     end
   end
 end
