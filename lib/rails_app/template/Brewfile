@@ -1,7 +1,7 @@
 # Install non-ruby dependencies required
 
 # Redis - For ActionCable support (and Sidekiq, caching, etc)
-brew "redis"
+# brew "redis"
 
 # Imagemagick or libvips - for processing images (avatars, file uploads, etc)
 brew "vips"

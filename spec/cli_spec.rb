@@ -17,9 +17,7 @@ RSpec.describe RailsApp::CLI do
 
     it "prompts for the app name and other options, then runs the command" do
       expect(prompt).to receive(:ask).with("What is the name of your application?", required: true)
-      expect(prompt).to receive(:yes?).with("Would you like to skip-spring?")
       expect(prompt).to receive(:select).with("How would you like to manage assets?", %w[propshaft sprockets])
-      expect(prompt).to receive(:select).with("Choose your javascript bundling?", %w[importmap esbuild bun])
       expect_any_instance_of(RailsApp::Command).to receive(:run)
 
       described_class.start

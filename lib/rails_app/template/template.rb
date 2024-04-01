@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "fileutils"
+require "shellwords"
+
 def add_template_to_source_path
   source_paths.unshift(File.expand_path(File.join(__dir__)))
 end
@@ -31,6 +34,7 @@ def add_javascript
 end
 
 def add_esbuild_script
+  copy_file "esbuild.config.mjs", "esbuild.config.mjs"
   build_script = "node esbuild.config.mjs"
 
   case `npx -v`.to_f
@@ -45,6 +49,64 @@ def add_esbuild_script
   end
 end
 
+def add_bootstrap
+  directory "app_bootstrap", "app", force: true
+end
+
+def copy_templates
+  copy_file ".rubocop.yml", ".rubocop.yml"
+  copy_file ".rubocop_todo.yml", ".rubocop_todo.yml"
+  copy_file "Brewfile", "Brewfile"
+
+  directory "bin", "bin", force: true
+
+  environment "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }", env: "development"
+  environment "config.action_mailer.default_url_options = { host: 'example.com' }", env: "test"
+end
+
+def setup_rspec
+  copy_file ".rspec", ".rspec"
+  directory "spec", "spec", force: true
+end
+
+def database_setup
+  remove_file "config/database.yml"
+  rails_command("db:system:change --to=postgresql")
+  rails_command("db:create")
+  rails_command("db:migrate")
+end
+
+def command_available?(command)
+  system("command -v #{command} >/dev/null 2>&1")
+end
+
+def run_setup
+  # Install system dependencies if Homebrew is installed
+  if command_available?("brew")
+    system("brew bundle check --no-lock --no-upgrade") || system!("brew bundle --no-upgrade --no-lock")
+  end
+end
+
+def add_static
+  generate "controller static home"
+
+  route "root to: 'static#home'"
+end
+
+def add_binstubs
+  run "bundle binstub rubocop"
+  run "bundle binstub rspec-core" if options[:skip_test]
+end
+
+def lint_code
+  run "bundle exec rubocop -a"
+end
+
+def initial_commit
+  run "git init"
+  run "git add . && git commit -m \"Initial_commit\""
+end
+
 # Main setup
 add_template_to_source_path
 
@@ -53,6 +115,16 @@ add_gems
 after_bundle do
   config_generators
   add_javascript
+  add_esbuild_script
+  add_bootstrap
+  copy_templates
+  setup_rspec
+  database_setup
+  run_setup
+  add_static
+  add_binstubs
+  lint_code
+  initial_commit
 
   say
   say "Rails app successfully created!", :blue
