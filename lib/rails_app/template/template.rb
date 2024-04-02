@@ -5,7 +5,6 @@ require "shellwords"
 
 puts "options: #{options}"
 puts "args: #{args}"
-puts "app: #{@root}"
 
 def add_template_to_source_path
   source_paths.unshift(File.expand_path(File.join(__dir__)))

@@ -15,7 +15,6 @@ module RailsApp
 
     def run
       command = "rails new #{@app_name} --no-rc #{skip_spring} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} -m #{template}"
-      puts command
       system(command)
     end
 
