@@ -47,6 +47,23 @@ def add_esbuild_script
   end
 end
 
+def add_users
+  generate "devise:install"
+
+  environment "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }", env: "development"
+  environment "config.action_mailer.default_url_options = { host: 'example.com' }", env: "test"
+
+  generate :devise, "User", "admin:boolean"
+
+  # Set admin default to false
+  in_root do
+    migration = Dir.glob("db/migrate/*").max_by { |f| File.mtime(f) }
+    gsub_file migration, /:admin/, ":admin, default: false"
+  end
+
+  gsub_file "config/initializers/devise.rb", / {2}# config.secret_key = .+/, "  config.secret_key = Rails.application.credentials.secret_key_base"
+end
+
 def add_bootstrap
   directory "app_bootstrap", "app", force: true
 end
@@ -57,9 +74,6 @@ def copy_templates
   copy_file "Brewfile", "Brewfile"
 
   directory "bin", "bin", force: true
-
-  environment "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }", env: "development"
-  environment "config.action_mailer.default_url_options = { host: 'example.com' }", env: "test"
 end
 
 def setup_rspec

@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "bootsnap" # used by rails new
+  spec.add_dependency "bootsnap", "~> 1.18", ">= 1.18.3" # used by rails new
   spec.add_dependency "thor", "~> 1.3", ">= 1.3.1"
-  spec.add_dependency "tty-prompt"
+  spec.add_dependency "tty-prompt", "~> 0.23.1"
 end

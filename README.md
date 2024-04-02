@@ -1,3 +1,4 @@
+![GitHub License](https://img.shields.io/github/license/eclectic-coding/rails_app)
 [![Tests](https://github.com/eclectic-coding/rails_app/actions/workflows/ci.yml/badge.svg)](https://github.com/eclectic-coding/rails_app/actions/workflows/ci.yml)
 # RailsApp
 

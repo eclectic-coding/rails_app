@@ -1,3 +1,5 @@
+gem "devise"
+
 group :development, :test do
   gem "faker"
 end
