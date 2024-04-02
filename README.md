@@ -1,6 +1,12 @@
 # RailsApp
 
-TODO: Delete this and the text below, and describe your gem
+RailsApp is a gem that provides a simple way to create a new Rails application with a pre-configured set of gems and settings, utilizing the Rails application templates feature.
+
+The initial release of this gem is an opinionated template that includes the following dependencies and settings:
+- Esbuild for JavaScript bundling
+- Bootstrap for CSS styling
+- RSpec for testing
+- Code quality tools: RuboCop, Brakeman, and Bundler Audit
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rails_app`. To experiment with that code, run `bin/console` for an interactive prompt.
 

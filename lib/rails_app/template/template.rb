@@ -3,6 +3,10 @@
 require "fileutils"
 require "shellwords"
 
+puts "options: #{options}"
+puts "args: #{args}"
+puts "app: #{@root}"
+
 def add_template_to_source_path
   source_paths.unshift(File.expand_path(File.join(__dir__)))
 end
@@ -19,11 +23,6 @@ def add_gems
   end
 
   directory "config", "config", force: true
-end
-
-def config_generators
-  inject_into_file "config/application.rb", "    config.generators.helper = false", after: "config.generators.system_tests = nil\n"
-  inject_into_file "config/application.rb", "    config.generators.stylesheets = false\n\n", after: "config.generators.helper = false\n"
 end
 
 def add_javascript
@@ -113,7 +112,6 @@ add_template_to_source_path
 add_gems
 
 after_bundle do
-  config_generators
   add_javascript
   add_esbuild_script
   add_bootstrap
@@ -132,4 +130,3 @@ after_bundle do
   say "To get started with your new app:", :green
   say "  cd #{app_name}"
 end
-
