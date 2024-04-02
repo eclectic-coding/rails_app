@@ -10,23 +10,22 @@ The initial release of this gem is an opinionated template that includes the fol
 - RSpec for testing
 - Code quality tools: RuboCop, Brakeman, and Bundler Audit
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rails_app`. To experiment with that code, run `bin/console` for an interactive prompt.
+The initial release of this gem **v.0.1.0** is starting with my personal preferences and a Rails template I have developed locally. I plan to expand the template to include more options and configurations with future releases which will make this template less opinionated.
 
 ## Installation
-
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
-Install the gem and add to the application's Gemfile by executing:
-
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+Install globally:
+```bash
+gem install rails_app
+```
 
 ## Usage
+To bootstrap a new Rails application: `rails_app`
 
-TODO: Write usage instructions here
+The user will be prompted to enter the name of the new Rails application, and the select the assets pipeline to use (propshaft or sprockets).
+
+The template will then create a new Rails application with the selected options.
+
+In addition, there is a custom binstub (`bin/ci`) that can be used to run the test suite and code quality tools (rubocop, brakeman, and bundle-audit).
 
 ## Development
 
@@ -36,7 +35,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rails_app.
+Bug reports and pull requests are welcome on GitHub at https://github.com/eclectic-coding/rails_app.
 
 ## License
 
