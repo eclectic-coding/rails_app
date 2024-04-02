@@ -1,3 +1,4 @@
+[![Tests](https://github.com/eclectic-coding/rails_app/actions/workflows/ci.yml/badge.svg)](https://github.com/eclectic-coding/rails_app/actions/workflows/ci.yml)
 # RailsApp
 
 RailsApp is a gem that provides a simple way to create a new Rails application with a pre-configured set of gems and settings, utilizing the Rails application templates feature.
