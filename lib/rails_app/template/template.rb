@@ -64,8 +64,19 @@ def add_users
   gsub_file "config/initializers/devise.rb", / {2}# config.secret_key = .+/, "  config.secret_key = Rails.application.credentials.secret_key_base"
 end
 
+def add_static
+  generate "controller static home"
+
+  route "root to: 'static#home'"
+end
+
 def add_bootstrap
   directory "app_bootstrap", "app", force: true
+end
+
+def setup_rspec
+  copy_file ".rspec", ".rspec"
+  directory "spec", "spec", force: true
 end
 
 def copy_templates
@@ -74,11 +85,6 @@ def copy_templates
   copy_file "Brewfile", "Brewfile"
 
   directory "bin", "bin", force: true
-end
-
-def setup_rspec
-  copy_file ".rspec", ".rspec"
-  directory "spec", "spec", force: true
 end
 
 def database_setup
@@ -97,12 +103,6 @@ def run_setup
   if command_available?("brew")
     system("brew bundle check --no-lock --no-upgrade") || system!("brew bundle --no-upgrade --no-lock")
   end
-end
-
-def add_static
-  generate "controller static home"
-
-  route "root to: 'static#home'"
 end
 
 def add_binstubs
@@ -127,12 +127,13 @@ add_gems
 after_bundle do
   add_javascript
   add_esbuild_script
+  add_users
+  add_static
   add_bootstrap
-  copy_templates
   setup_rspec
+  copy_templates
   database_setup
   run_setup
-  add_static
   add_binstubs
   lint_code
   initial_commit
