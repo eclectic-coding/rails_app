@@ -77,7 +77,7 @@ def add_styling
   elsif options[:css] == "bulma"
     say "BULMA COMING SOON", :red
   elsif options[:css] == "postcss"
-    say "POSTCSS COMING SOON", :red
+    directory "app_postcss", "app", force: true
   elsif options[:css] == "sass"
     directory "app_sass", "app", force: true
   end
