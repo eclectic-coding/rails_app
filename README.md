@@ -8,7 +8,7 @@ The initial release of this gem is an opinionated template that includes the fol
 - Esbuild for JavaScript bundling
 - Bootstrap for CSS styling
 - RSpec for testing
-- Code quality tools: RuboCop, Brakeman, and Bundler Audit
+- Code quality tools: Rubocop, Brakeman, and Bundler Audit
 
 The initial release of this gem **v.0.1.0** is starting with my personal preferences and a Rails template I have developed locally. I plan to expand the template to include more options and configurations with future releases which will make this template less opinionated.
 
