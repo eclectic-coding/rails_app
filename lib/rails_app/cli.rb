@@ -13,7 +13,7 @@ module RailsApp
         {name: "Bootstrap", value: "bootstrap"},
         {name: "Tailwind CSS", value: "tailwindcss", disabled: "(coming soon)"},
         {name: "Bulma", value: "bulma", disabled: "(coming soon)"},
-        {name: "PostCSS", value: "postcss", disabled: "(coming soon)"},
+        {name: "PostCSS", value: "postcss"},
         {name: "SASS", value: "sass"}
       ]
       styling = prompt.select("How would you like to manage styling?", styling_choices)
