@@ -14,8 +14,7 @@ module RailsApp
         {name: "Tailwind CSS", value: "tailwindcss", disabled: "(coming soon)"},
         {name: "Bulma", value: "bulma", disabled: "(coming soon)"},
         {name: "PostCSS", value: "postcss", disabled: "(coming soon)"},
-        {name: "SASS", value: "sass", disabled: "(coming soon)"},
-        {name: "None", value: nil}
+        {name: "SASS", value: "sass"}
       ]
       styling = prompt.select("How would you like to manage styling?", styling_choices)
 

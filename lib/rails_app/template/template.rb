@@ -3,8 +3,7 @@
 require "fileutils"
 require "shellwords"
 
-puts "options: #{options}"
-puts "args: #{args}"
+# puts "options: #{options}"
 
 def add_template_to_source_path
   source_paths.unshift(File.expand_path(File.join(__dir__)))
@@ -74,15 +73,13 @@ def add_styling
   if options[:css] == "bootstrap"
     directory "app_bootstrap", "app", force: true
   elsif options[:css] == "tailwindcss"
-    say "TAILWIND CSS COMING SOON", :green
+    say "TAILWIND CSS COMING SOON", :red
   elsif options[:css] == "bulma"
-    say "BULMA COMING SOON", :green
+    say "BULMA COMING SOON", :red
   elsif options[:css] == "postcss"
-    say "POSTCSS COMING SOON", :green
+    say "POSTCSS COMING SOON", :red
   elsif options[:css] == "sass"
-    say "SASS COMING SOON", :green
-  else # no styling framework
-    say "NO STYLING FRAMEWORK", :green
+    directory "app_sass", "app", force: true
   end
 end
 

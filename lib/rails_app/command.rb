@@ -33,11 +33,7 @@ module RailsApp
     end
 
     def styling_framework
-      return if @styling == "none"
-
-      if @styling == "bootstrap"
-        "--css bootstrap"
-      end
+      "--css #{@styling}"
     end
 
     def testing_framework
