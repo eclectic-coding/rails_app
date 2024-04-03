@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased](https://github.com/eclectic-coding/rails_app/tree/HEAD)
+
+[Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.2.0...HEAD)
+
+**Implemented enhancements:**
+
+- Add user option to select other styling systems [\#2](https://github.com/eclectic-coding/rails_app/issues/2)
+- add user option to select sass styling systems [\#7](https://github.com/eclectic-coding/rails_app/pull/7) ([eclectic-coding](https://github.com/eclectic-coding))
+
 ## [0.2.0](https://github.com/eclectic-coding/rails_app/tree/0.2.0) (2024-04-03)
 
 [Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.1.0...0.2.0)
