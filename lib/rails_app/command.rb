@@ -4,9 +4,10 @@ module RailsApp
   class Command
     attr_reader :app_name, :bundling, :assets
 
-    def initialize(app_name:, assets:)
+    def initialize(app_name:, assets:, styling:)
       @app_name = app_name
       @assets = assets
+      @styling = styling
     end
 
     def template
@@ -15,6 +16,7 @@ module RailsApp
 
     def run
       command = "rails new #{@app_name} --no-rc #{skip_spring} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} -m #{template}"
+      puts command
       system(command)
     end
 
@@ -31,7 +33,11 @@ module RailsApp
     end
 
     def styling_framework
-      "--css bootstrap"
+      return if @styling == "none"
+
+      if @styling == "bootstrap"
+        "--css bootstrap"
+      end
     end
 
     def testing_framework

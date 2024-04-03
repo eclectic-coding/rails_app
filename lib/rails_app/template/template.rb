@@ -70,8 +70,20 @@ def add_static
   route "root to: 'static#home'"
 end
 
-def add_bootstrap
-  directory "app_bootstrap", "app", force: true
+def add_styling
+  if options[:css] == "bootstrap"
+    directory "app_bootstrap", "app", force: true
+  elsif options[:css] == "tailwindcss"
+    say "TAILWIND CSS COMING SOON", :green
+  elsif options[:css] == "bulma"
+    say "BULMA COMING SOON", :green
+  elsif options[:css] == "postcss"
+    say "POSTCSS COMING SOON", :green
+  elsif options[:css] == "sass"
+    say "SASS COMING SOON", :green
+  else # no styling framework
+    say "NO STYLING FRAMEWORK", :green
+  end
 end
 
 def setup_rspec
@@ -129,7 +141,7 @@ after_bundle do
   add_esbuild_script
   add_users
   add_static
-  add_bootstrap
+  add_styling
   setup_rspec
   copy_templates
   database_setup
