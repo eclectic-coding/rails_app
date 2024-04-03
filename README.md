@@ -21,11 +21,27 @@ gem install rails_app
 ## Usage
 To bootstrap a new Rails application: `rails_app`
 
-The user will be prompted to enter the name of the new Rails application, and the select the assets pipeline to use (propshaft or sprockets).
+The user will be prompted to enter the name of the new Rails application, and the select the assets pipeline to use (propshaft or sprockets), and a styling option:
+
+![](./screenshot_cli.png)
 
 The template will then create a new Rails application with the selected options.
 
-In addition, there is a custom binstub (`bin/ci`) that can be used to run the test suite and code quality tools (rubocop, brakeman, and bundle-audit).
+### Testing
+The template includes RSpec for testing, which includes pre configured:
+- FactoryBot
+- Faker
+- Webmock
+- VCR
+- Simplecov
+
+### Code Quality Tools
+The template includes the following code quality tools:
+- Rubocop using the `rubocop-rails-omakase` gem with a few custom settings in a provided `.rubocop.yml`
+- Brakeman for security scanning
+- Bundler Audit for checking for vulnerable gems
+
+All of this tools can be run using the following command, which also will run the test suite: `bin/ci`
 
 ## Development
 
