@@ -3,8 +3,7 @@
 require "fileutils"
 require "shellwords"
 
-puts "options: #{options}"
-puts "args: #{args}"
+# puts "options: #{options}"
 
 def add_template_to_source_path
   source_paths.unshift(File.expand_path(File.join(__dir__)))
@@ -70,8 +69,18 @@ def add_static
   route "root to: 'static#home'"
 end
 
-def add_bootstrap
-  directory "app_bootstrap", "app", force: true
+def add_styling
+  if options[:css] == "bootstrap"
+    directory "app_bootstrap", "app", force: true
+  elsif options[:css] == "tailwindcss"
+    say "TAILWIND CSS COMING SOON", :red
+  elsif options[:css] == "bulma"
+    say "BULMA COMING SOON", :red
+  elsif options[:css] == "postcss"
+    say "POSTCSS COMING SOON", :red
+  elsif options[:css] == "sass"
+    directory "app_sass", "app", force: true
+  end
 end
 
 def setup_rspec
@@ -129,7 +138,7 @@ after_bundle do
   add_esbuild_script
   add_users
   add_static
-  add_bootstrap
+  add_styling
   setup_rspec
   copy_templates
   database_setup

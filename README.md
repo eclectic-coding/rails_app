@@ -8,7 +8,7 @@ The initial release of this gem is an opinionated template that includes the fol
 - Esbuild for JavaScript bundling
 - Bootstrap for CSS styling
 - RSpec for testing
-- Code quality tools: RuboCop, Brakeman, and Bundler Audit
+- Code quality tools: Rubocop, Brakeman, and Bundler Audit
 
 The initial release of this gem **v.0.1.0** is starting with my personal preferences and a Rails template I have developed locally. I plan to expand the template to include more options and configurations with future releases which will make this template less opinionated.
 
@@ -21,11 +21,27 @@ gem install rails_app
 ## Usage
 To bootstrap a new Rails application: `rails_app`
 
-The user will be prompted to enter the name of the new Rails application, and the select the assets pipeline to use (propshaft or sprockets).
+The user will be prompted to enter the name of the new Rails application, and the select the assets pipeline to use (propshaft or sprockets), and a styling option:
+
+![](./screenshot_cli.png)
 
 The template will then create a new Rails application with the selected options.
 
-In addition, there is a custom binstub (`bin/ci`) that can be used to run the test suite and code quality tools (rubocop, brakeman, and bundle-audit).
+### Testing
+The template includes RSpec for testing, which includes pre configured:
+- FactoryBot
+- Faker
+- Webmock
+- VCR
+- Simplecov
+
+### Code Quality Tools
+The template includes the following code quality tools:
+- Rubocop using the `rubocop-rails-omakase` gem with a few custom settings in a provided `.rubocop.yml`
+- Brakeman for security scanning
+- Bundler Audit for checking for vulnerable gems
+
+All of this tools can be run using the following command, which also will run the test suite: `bin/ci`
 
 ## Development
 
