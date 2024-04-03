@@ -4,8 +4,13 @@
 
 [Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.1.0...HEAD)
 
+**Closed issues:**
+
+- Integrate github\_changelog\_generator  [\#5](https://github.com/eclectic-coding/rails_app/issues/5)
+
 **Merged pull requests:**
 
+- Integrate GitHub changelog generator [\#6](https://github.com/eclectic-coding/rails_app/pull/6) ([eclectic-coding](https://github.com/eclectic-coding))
 - Update CHANGELOG.md [\#3](https://github.com/eclectic-coding/rails_app/pull/3) ([eclectic-coding](https://github.com/eclectic-coding))
 
 ## [0.1.0](https://github.com/eclectic-coding/rails_app/tree/0.1.0) (2024-04-02)
