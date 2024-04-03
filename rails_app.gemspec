@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Chuck Smith"]
   spec.email = ["chuck@eclecticsaddlebag.com"]
 
-  spec.summary = "Write a short summary, because RubyGems requires one."
-  spec.description = "Write a longer description or delete this line."
+  spec.summary = "Bootstrap a new customized Rails application with a better development experience."
+  spec.description = "Bootstrap a new customized Rails application with a better development experience."
   spec.homepage = "https://github.com/eclectic-coding/rails_app"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.4"
