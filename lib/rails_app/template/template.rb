@@ -89,7 +89,8 @@ end
 def add_styling
   if options[:css] == "bootstrap"
     directory "app_bootstrap", "app", force: true
-  elsif options[:css] == "tailwindcss"
+  elsif options[:css] == "tailwind"
+    config_tailwind
     say "TAILWIND CSS COMING SOON", :red
   elsif options[:css] == "bulma"
     directory "app_bulma", "app", force: true
@@ -98,6 +99,15 @@ def add_styling
   elsif options[:css] == "sass"
     directory "app_sass", "app", force: true
   end
+end
+
+def config_tailwind
+  run "yarn add flowbite postcss-import postcss-nested"
+
+  copy_file "app_tailwind/tailwind.config.js", "tailwind.config.js", force: true
+  copy_file "app_tailwind/postcss.config.js", "postcss.config.js", force: true
+
+  gsub_file "package.json", "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify", "tailwindcss --postcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify"
 end
 
 def setup_rspec
