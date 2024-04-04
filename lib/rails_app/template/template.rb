@@ -94,6 +94,8 @@ def copy_templates
   copy_file "Brewfile", "Brewfile"
 
   directory "bin", "bin", force: true
+
+  gsub_file "config/environments/development.rb", / {2}# config.action_view.annotate_rendered_view_with_filenames = true/, "  config.action_view.annotate_rendered_view_with_filenames = true"
 end
 
 def database_setup
