@@ -25,6 +25,10 @@ The user will be prompted to enter the name of the new Rails application, and th
 
 ![](./screenshot_cli.png)
 
+Also, you can select your database of choice:
+
+![](./screenshot_cli_db.png)
+
 The template will then create a new Rails application with the selected options.
 
 ### Testing

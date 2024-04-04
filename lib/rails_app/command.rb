@@ -2,12 +2,13 @@
 
 module RailsApp
   class Command
-    attr_reader :app_name, :bundling, :assets
+    attr_reader :app_name, :assets, :styling, :database
 
-    def initialize(app_name:, assets:, styling:)
+    def initialize(app_name:, assets:, styling:, database:)
       @app_name = app_name
       @assets = assets
       @styling = styling
+      @database = database
     end
 
     def template
@@ -15,13 +16,17 @@ module RailsApp
     end
 
     def run
-      command = "rails new #{@app_name} --no-rc #{skip_spring} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} -m #{template}"
+      command = "rails new #{@app_name} --no-rc #{skip_spring} #{database_adapter} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} -m #{template}"
       puts command
       system(command)
     end
 
     def skip_spring
       "--skip-spring"
+    end
+
+    def database_adapter
+      "-d #{@database}" unless database == "sqlite3"
     end
 
     def javascript_bundling

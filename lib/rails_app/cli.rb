@@ -17,9 +17,9 @@ module RailsApp
         {name: "SASS", value: "sass"}
       ]
       styling = prompt.select("How would you like to manage styling?", styling_choices)
-      # database = prompt.select("Which database would you like to use?", %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc])
+      database = prompt.select("Which database would you like to use?", %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc])
 
-      Command.new(app_name: app_name, assets: assets, styling: styling).run
+      Command.new(app_name: app_name, assets: assets, styling: styling, database: database).run
     end
   end
 end
