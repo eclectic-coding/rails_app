@@ -6,5 +6,6 @@ module RailsApp
   autoload :App, "rails_app/rails_app"
   autoload :CLI, "rails_app/cli"
   autoload :Command, "rails_app/command"
+  autoload :OptionsData, "rails_app/options_data"
   autoload :Error, "rails_app/error"
 end

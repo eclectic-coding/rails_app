@@ -31,7 +31,11 @@ Also, you can select your database of choice:
 
 The template will then create a new Rails application with the selected options.
 
-### Testing
+### Optional CLI Syntax
+
+
+
+## Testing
 The template includes RSpec for testing, which includes pre configured:
 - FactoryBot
 - Faker
