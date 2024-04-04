@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased](https://github.com/eclectic-coding/rails_app/tree/HEAD)
+
+[Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.4.0...HEAD)
+
+**Implemented enhancements:**
+
+- Enable Annotate rendered view with file names [\#12](https://github.com/eclectic-coding/rails_app/issues/12)
+- Uncomment annotating of rendered view filenames [\#13](https://github.com/eclectic-coding/rails_app/pull/13) ([eclectic-coding](https://github.com/eclectic-coding))
+
 ## [0.4.0](https://github.com/eclectic-coding/rails_app/tree/0.4.0) (2024-04-04)
 
 [Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.3.0...0.4.0)
