@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased](https://github.com/eclectic-coding/rails_app/tree/HEAD)
+
+[Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.5.0...HEAD)
+
+**Implemented enhancements:**
+
+- Add option for Bulma styling system [\#9](https://github.com/eclectic-coding/rails_app/issues/9)
+- Add option for bulma styling system [\#17](https://github.com/eclectic-coding/rails_app/pull/17) ([eclectic-coding](https://github.com/eclectic-coding))
+
 ## [0.5.0](https://github.com/eclectic-coding/rails_app/tree/0.5.0) (2024-04-04)
 
 [Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.4.0...0.5.0)
