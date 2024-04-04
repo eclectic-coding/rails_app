@@ -12,7 +12,7 @@ module RailsApp
       styling_choices = [
         {name: "Bootstrap", value: "bootstrap"},
         {name: "Tailwind CSS", value: "tailwindcss", disabled: "(coming soon)"},
-        {name: "Bulma", value: "bulma", disabled: "(coming soon)"},
+        {name: "Bulma", value: "bulma"},
         {name: "PostCSS", value: "postcss"},
         {name: "SASS", value: "sass"}
       ]
