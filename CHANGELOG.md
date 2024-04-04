@@ -6,7 +6,9 @@
 
 **Implemented enhancements:**
 
+- Add more development tools [\#15](https://github.com/eclectic-coding/rails_app/issues/15)
 - Enable Annotate rendered view with file names [\#12](https://github.com/eclectic-coding/rails_app/issues/12)
+- Added annotate and bullet to development environment [\#16](https://github.com/eclectic-coding/rails_app/pull/16) ([eclectic-coding](https://github.com/eclectic-coding))
 - Uncomment annotating of rendered view filenames [\#13](https://github.com/eclectic-coding/rails_app/pull/13) ([eclectic-coding](https://github.com/eclectic-coding))
 
 ## [0.4.0](https://github.com/eclectic-coding/rails_app/tree/0.4.0) (2024-04-04)
