@@ -2,4 +2,4 @@
 
 require "rails_app"
 
-RailsApp::App.rails_app
+RailsApp::App.rails_app(ARGV)
