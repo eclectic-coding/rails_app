@@ -1,0 +1,30 @@
+.btn {
+   @apply focus:ring-4 font-medium focus:outline-none;
+   @apply px-5 py-2.5;
+}
+
+.btn-sm {
+    @apply focus:ring-4 font-medium focus:outline-none;
+    @apply px-3 py-1.5;
+}
+
+.btn-primary {
+    @apply text-sm font-medium text-white;
+    @apply bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800;
+}
+
+.btn-outline-primary {
+    @apply text-sm font-medium text-primary-700;
+    @apply border border-primary-700 hover:bg-primary-700 hover:text-white focus:ring-primary-300 dark:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:focus:ring-primary-800;
+}
+
+.btn-success {
+    @apply text-sm font-medium text-white;
+    @apply bg-success-700 hover:bg-success-800 focus:ring-success-300 dark:bg-success-600 dark:hover:bg-success-700 dark:focus:ring-success-800;
+}
+
+.btn-outline-success {
+    @apply text-sm font-medium text-success-700;
+    @apply border border-success-700 hover:bg-success-700 hover:text-white focus:ring-success-300 dark:border-success-600 dark:hover:bg-success-600 dark:hover:text-white dark:focus:ring-success-800;
+}
+

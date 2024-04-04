@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Catapp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  </head>
+
+  <body class="flex flex-col h-screen bg-gray-50">
+    <main class="mb-auto">
+      <%= render "shared/navbar" %>
+
+      <div class="container mx-auto">
+        <%= yield %>
+      </div>
+
+      <% if Rails.env.development? %>
+          <div class="bg-white w-1/2 p-4 mx-auto text-center border text-red-500 text-sm">
+            <%= debug(params) %>
+          </div>
+        <% end %>
+    </main>
+  </body>
+</html>
