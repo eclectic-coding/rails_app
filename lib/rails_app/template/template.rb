@@ -63,6 +63,23 @@ def add_users
   gsub_file "config/initializers/devise.rb", / {2}# config.secret_key = .+/, "  config.secret_key = Rails.application.credentials.secret_key_base"
 end
 
+def dev_tools
+  generate "annotate:install"
+
+  inject_into_file "config/environments/development.rb", after: "Rails.application.configure do\n" do
+    <<-CODE
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = false
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+    Bullet.add_footer = true
+  end\n
+    CODE
+  end
+end
+
 def add_static
   generate "controller static home"
 
@@ -139,6 +156,7 @@ after_bundle do
   add_javascript
   add_esbuild_script
   add_users
+  dev_tools
   add_static
   add_styling
   setup_rspec
