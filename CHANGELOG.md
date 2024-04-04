@@ -6,7 +6,9 @@
 
 **Implemented enhancements:**
 
+- Add option for Tailwind [\#10](https://github.com/eclectic-coding/rails_app/issues/10)
 - Add option for Bulma styling system [\#9](https://github.com/eclectic-coding/rails_app/issues/9)
+- Add option for tailwind [\#18](https://github.com/eclectic-coding/rails_app/pull/18) ([eclectic-coding](https://github.com/eclectic-coding))
 - Add option for bulma styling system [\#17](https://github.com/eclectic-coding/rails_app/pull/17) ([eclectic-coding](https://github.com/eclectic-coding))
 
 ## [0.5.0](https://github.com/eclectic-coding/rails_app/tree/0.5.0) (2024-04-04)
