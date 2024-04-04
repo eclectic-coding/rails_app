@@ -33,7 +33,24 @@ The template will then create a new Rails application with the selected options.
 
 ### Optional CLI Syntax
 
+There is an additional syntax, available starting with release `v. 0.7.0`, which allows you to use `rails_app` very similarly to the `rails new` command:
 
+```bash
+rails_app new my_app -a propshaft --css bootstrap -d postgresql
+```
+I few things to note:
+- the `app_name` must be first, just like with `rails new`
+- the following arguments and flags must be separated by a space `-a propshaft`. Since, the parser ignores the flag and checks for the specific keywords only, you technically can use the follow: `rails_app my_app propshaft bootstrap postgresql`. 
+
+If you use this syntax, the template will not prompt you the application name, and subsequent options will be preselected for you.
+
+Right not this syntax only supports the following options:
+- app name
+- assets pipeline
+- styling
+- database
+
+More options will be added in future releases.
 
 ## Testing
 The template includes RSpec for testing, which includes pre configured:
