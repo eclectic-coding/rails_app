@@ -1,5 +1,15 @@
 # Changelog
 
+## [Unreleased](https://github.com/eclectic-coding/rails_app/tree/HEAD)
+
+[Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.6.0...HEAD)
+
+**Implemented enhancements:**
+
+- handle optional CLI ARGV [\#21](https://github.com/eclectic-coding/rails_app/issues/21)
+- Add user option to select other styling systems [\#2](https://github.com/eclectic-coding/rails_app/issues/2)
+- Handle optional cli argv [\#22](https://github.com/eclectic-coding/rails_app/pull/22) ([eclectic-coding](https://github.com/eclectic-coding))
+
 ## [0.6.0](https://github.com/eclectic-coding/rails_app/tree/0.6.0) (2024-04-04)
 
 [Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.5.0...0.6.0)
