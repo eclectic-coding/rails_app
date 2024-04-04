@@ -78,7 +78,6 @@ def dev_tools
   end\n
     CODE
   end
-
 end
 
 def add_static
