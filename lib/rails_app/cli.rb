@@ -8,7 +8,6 @@ module RailsApp
       prompt = TTY::Prompt.new
 
       options_data = OptionsData.new(args)
-      puts "options: #{options}"
 
       app_name = options_data.app_name || prompt.ask("What is the name of your application?", required: true)
 
@@ -25,6 +24,8 @@ module RailsApp
       database = prompt.select("Which database would you like to use?",
         %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
         default: options_data.default_database)
+
+      # save configuration
 
       Command.new(app_name: app_name, assets: assets, styling: styling, database: database).run
     end

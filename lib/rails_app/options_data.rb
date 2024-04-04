@@ -25,8 +25,10 @@ module RailsApp
         "postcss"
       elsif @options.include?("sass")
         "sass"
-      else
+      elsif @options.include?("bootstrap")
         "bootstrap"
+      else
+        nil
       end
     end
 
