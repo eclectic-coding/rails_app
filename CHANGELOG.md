@@ -1,12 +1,20 @@
 # Changelog
 
+## [0.4.0](https://github.com/eclectic-coding/rails_app/tree/0.4.0) (2024-04-04)
+
+[Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.3.0...0.4.0)
+
+**Implemented enhancements:**
+
+- postcss [\#8](https://github.com/eclectic-coding/rails_app/issues/8)
+- Add Postcss styling option [\#11](https://github.com/eclectic-coding/rails_app/pull/11) ([eclectic-coding](https://github.com/eclectic-coding))
+
 ## [0.3.0](https://github.com/eclectic-coding/rails_app/tree/0.3.0) (2024-04-03)
 
 [Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.2.0...0.3.0)
 
 **Implemented enhancements:**
 
-- Add user option to select other styling systems [\#2](https://github.com/eclectic-coding/rails_app/issues/2)
 - add user option to select sass styling systems [\#7](https://github.com/eclectic-coding/rails_app/pull/7) ([eclectic-coding](https://github.com/eclectic-coding))
 
 ## [0.2.0](https://github.com/eclectic-coding/rails_app/tree/0.2.0) (2024-04-03)
