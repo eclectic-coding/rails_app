@@ -43,6 +43,10 @@ The template includes the following code quality tools:
 
 All of this tools can be run using the following command, which also will run the test suite: `bin/ci`
 
+In addition, the template includes:
+- the `annotate` gem to annotate models and and factories with schema information
+- the `bullet` gem to help identify and remove N+1 queries
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

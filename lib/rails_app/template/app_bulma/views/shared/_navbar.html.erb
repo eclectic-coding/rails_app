@@ -1,0 +1,33 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://bulma.io">
+      TestApp
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+        <% if user_signed_in? %>
+            <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "button is-primary" %>
+        <% else %>
+          <%= link_to new_user_session_path, class: "button is-primary" do %>
+            <strong>Login</strong>
+          <% end %>
+          <%= link_to new_user_registration_path, class: "button is-primary" do %>
+            <strong>Sign up</strong>
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
