@@ -64,8 +64,15 @@ Then your options will be pre-selected:
 ![](assets/screenshot_cli_useconfig.png)
 
 # Features
-section coming soon 
 
+## Authentication 
+documentation coming soon
+
+## Code Quality Tools
+The template includes the following code quality tools:
+- Rubocop using the `rubocop-rails-omakase` gem with a few custom settings in a provided `.rubocop.yml`
+- Brakeman for security scanning
+- Bundler Audit for checking for vulnerable gems
 
 ## Testing
 The template includes RSpec for testing, which includes pre configured:
@@ -75,19 +82,13 @@ The template includes RSpec for testing, which includes pre configured:
 - VCR
 - Simplecov
 
-### Code Quality Tools
-The template includes the following code quality tools:
-- Rubocop using the `rubocop-rails-omakase` gem with a few custom settings in a provided `.rubocop.yml`
-- Brakeman for security scanning
-- Bundler Audit for checking for vulnerable gems
-
 All of this tools can be run using the following command, which also will run the test suite: `bin/ci`
 
 In addition, the template includes:
 - the `annotate` gem to annotate models and and factories with schema information
 - the `bullet` gem to help identify and remove N+1 queries
 
-## Development
+# Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
