@@ -1,5 +1,6 @@
 ![GitHub License](https://img.shields.io/github/license/eclectic-coding/rails_app)
 [![Tests](https://github.com/eclectic-coding/rails_app/actions/workflows/ci.yml/badge.svg)](https://github.com/eclectic-coding/rails_app/actions/workflows/ci.yml)
+[![Gem Version](https://badge.fury.io/rb/rails_app.svg)](https://badge.fury.io/rb/rails_app)
 # RailsApp
 
 RailsApp is a gem that provides a simple way to create a new Rails application with a pre-configured set of gems and settings, utilizing the Rails application templates feature.
@@ -23,17 +24,18 @@ To bootstrap a new Rails application: `rails_app`
 
 The user will be prompted to enter the name of the new Rails application, and the select the assets pipeline to use (propshaft or sprockets), and a styling option:
 
-![](./screenshot_cli.png)
+![](assets/screenshot_cli.png)
 
 Also, you can select your database of choice:
 
-![](./screenshot_cli_db.png)
+![](assets/screenshot_cli_db.png)
 
 The template will then create a new Rails application with the selected options.
 
 ### Optional CLI Syntax
 
 There is an additional syntax, available starting with release `v. 0.7.0`, which allows you to use `rails_app` very similarly to the `rails new` command:
+
 
 ```bash
 rails_app new my_app -a propshaft --css bootstrap -d postgresql
@@ -51,6 +53,15 @@ Right not this syntax only supports the following options:
 - database
 
 More options will be added in future releases.
+
+## Configuration
+**NEW** Starting with release `v. 0.8.0`, you can save your preferred defaults to you users home directory (`rails_aap-config.yml`).
+If a file has been previously saved, you will be prompted if you want to use:
+![](assets/screenshot_cli_readconfig.png)
+
+
+Then your options will be pre-selected:
+![](assets/screenshot_cli_useconfig.png)
 
 ## Testing
 The template includes RSpec for testing, which includes pre configured:
