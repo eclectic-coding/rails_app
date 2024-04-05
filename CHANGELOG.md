@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased](https://github.com/eclectic-coding/rails_app/tree/HEAD)
+
+[Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.7.0...HEAD)
+
+**Implemented enhancements:**
+
+- Add more tests [\#4](https://github.com/eclectic-coding/rails_app/issues/4)
+- 4 add more tests [\#23](https://github.com/eclectic-coding/rails_app/pull/23) ([eclectic-coding](https://github.com/eclectic-coding))
+
 ## [0.7.0](https://github.com/eclectic-coding/rails_app/tree/0.7.0) (2024-04-04)
 
 [Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.6.0...0.7.0)
