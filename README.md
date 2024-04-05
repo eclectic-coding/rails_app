@@ -74,6 +74,12 @@ The template includes the following code quality tools:
 - Brakeman for security scanning
 - Bundler Audit for checking for vulnerable gems
 
+All of this tools can be run using the following command, which also will run the test suite: `bin/ci`
+
+In addition, the template includes:
+- the `annotate` gem to annotate models and factories with schema information
+- the `bullet` gem to help identify and diagnose N+1 queries
+
 ## Testing
 The template includes RSpec for testing, which includes pre configured:
 - FactoryBot
@@ -81,12 +87,6 @@ The template includes RSpec for testing, which includes pre configured:
 - Webmock
 - VCR
 - Simplecov
-
-All of this tools can be run using the following command, which also will run the test suite: `bin/ci`
-
-In addition, the template includes:
-- the `annotate` gem to annotate models and factories with schema information
-- the `bullet` gem to help identify and diagnose N+1 queries
 
 # Development
 
