@@ -9,23 +9,21 @@ module RailsApp
 
       options_data = OptionsData.new(args)
       config_file = ConfigFile.new
-      puts "Configuration file: #{config_file.exist?}"
 
       app_name = options_data.app_name || prompt.ask("What is the name of your application?", required: true)
 
-      assets = prompt.select("How would you like to manage assets?", %w[propshaft sprockets], default: options_data.default_assets)
-      styling_choices = [
-        {name: "Bootstrap", value: "bootstrap"},
-        {name: "Tailwind CSS", value: "tailwind"},
-        {name: "Bulma", value: "bulma"},
-        {name: "PostCSS", value: "postcss"},
-        {name: "SASS", value: "sass"}
-      ]
-      styling = prompt.select("How would you like to manage styling?", styling_choices, default: options_data.default_styling)
+      # Read the configuration and ask the user if they want to use it
+      config_options = config_file.read
+      if config_options && prompt.yes?("Do you want to use this configuration? #{config_options}")
+        options_data = OptionsData.from_config(config_options)
+      end
+      puts "Using configuration: #{options_data.options[1].class}"
 
+      assets = prompt.select("How would you like to manage assets?", %w[propshaft sprockets], default: options_data.default_assets)
+      styling = prompt.select("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass], default: options_data.default_styling)
       database = prompt.select("Which database would you like to use?",
-        %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
-        default: options_data.default_database)
+                               %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
+                               default: options_data.default_database)
 
       # Collect all configuration options into a hash
       config_options = {
@@ -45,7 +43,6 @@ module RailsApp
         config_file.write(force: true)
         puts "Configuration saved successfully @ #{config_file.full_path}"
       end
-
 
       Command.new(config_options).run
     end

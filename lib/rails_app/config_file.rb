@@ -26,5 +26,10 @@ module RailsApp
     def full_path
       File.join(@config.location_paths[0] + '/' + @config.filename + @config.extname)
     end
+
+    def read
+      @config.read if exist?
+      @config.to_h
+    end
   end
 end
