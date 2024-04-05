@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module RailsApp
   class Command
     attr_reader :app_name, :assets, :styling, :database
@@ -17,6 +15,7 @@ module RailsApp
 
     def run
       command = "rails new #{@app_name} --no-rc #{skip_spring} #{database_adapter} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} -m #{template}"
+      command.squeeze!(" ")
       puts command
       system(command)
     end
