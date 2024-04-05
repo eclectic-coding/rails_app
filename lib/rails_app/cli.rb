@@ -8,6 +8,8 @@ module RailsApp
       prompt = TTY::Prompt.new
 
       options_data = OptionsData.new(args)
+      config_file = ConfigFile.new
+      puts "Configuration file: #{config_file.exist?}"
 
       app_name = options_data.app_name || prompt.ask("What is the name of your application?", required: true)
 
@@ -25,7 +27,25 @@ module RailsApp
         %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
         default: options_data.default_database)
 
-      # save configuration
+      # Collect all configuration options into a hash
+      config_options = {
+        app_name: app_name,
+        assets: assets,
+        styling: styling,
+        database: database
+      }
+
+      # Ask the user if they wish to save their configuration
+      if prompt.yes?("Do you wish to save your configuration?")
+        # Iterate over the hash and set the configuration
+        config_options.each do |key, value|
+          next if key == :app_name
+          config_file.set(key, value)
+        end
+        config_file.write(force: true)
+        puts "Configuration saved successfully @ #{config_file.full_path}"
+      end
+
 
       Command.new(app_name: app_name, assets: assets, styling: styling, database: database).run
     end

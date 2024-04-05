@@ -28,7 +28,7 @@ module RailsApp
       elsif @options.include?("bootstrap")
         "bootstrap"
       else
-        "bootstrap"
+        nil
       end
     end
 
