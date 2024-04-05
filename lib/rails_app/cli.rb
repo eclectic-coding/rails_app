@@ -47,7 +47,7 @@ module RailsApp
       end
 
 
-      Command.new(app_name: app_name, assets: assets, styling: styling, database: database).run
+      Command.new(config_options).run
     end
   end
 end
