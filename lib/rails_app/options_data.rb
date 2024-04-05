@@ -5,7 +5,7 @@ module RailsApp
     attr_reader :options
 
     def initialize(args)
-      @options = args.flat_map { |arg| arg.split(" ") }
+      @options = args
     end
 
     def self.from_config(config_hash)

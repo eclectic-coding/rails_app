@@ -17,7 +17,6 @@ module RailsApp
       if config_options && prompt.yes?("Do you want to use this configuration? #{config_options}")
         options_data = OptionsData.from_config(config_options)
       end
-      puts "Using configuration: #{options_data.options[1].class}"
 
       assets = prompt.select("How would you like to manage assets?", %w[propshaft sprockets], default: options_data.default_assets)
       styling = prompt.select("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass], default: options_data.default_styling)
