@@ -38,7 +38,7 @@ There is an additional syntax, available starting with release `v. 0.7.0`, which
 
 
 ```bash
-rails_app new my_app -a propshaft --css bootstrap -d postgresql
+rails_app my_app -a propshaft --css bootstrap -d postgresql
 ```
 I few things to note:
 - the `app_name` must be first, just like with `rails new`
@@ -85,8 +85,8 @@ The template includes RSpec for testing, which includes pre configured:
 All of this tools can be run using the following command, which also will run the test suite: `bin/ci`
 
 In addition, the template includes:
-- the `annotate` gem to annotate models and and factories with schema information
-- the `bullet` gem to help identify and remove N+1 queries
+- the `annotate` gem to annotate models and factories with schema information
+- the `bullet` gem to help identify and diagnose N+1 queries
 
 # Development
 
