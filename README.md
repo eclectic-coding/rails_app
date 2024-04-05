@@ -63,6 +63,10 @@ If a file has been previously saved, you will be prompted if you want to use:
 Then your options will be pre-selected:
 ![](assets/screenshot_cli_useconfig.png)
 
+#Features
+section coming soon 
+
+
 ## Testing
 The template includes RSpec for testing, which includes pre configured:
 - FactoryBot
