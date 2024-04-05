@@ -2,11 +2,11 @@ module RailsApp
   class Command
     attr_reader :app_name, :assets, :styling, :database
 
-    def initialize(app_name:, assets:, styling:, database:)
-      @app_name = app_name
-      @assets = assets
-      @styling = styling
-      @database = database
+    def initialize(args)
+      @app_name = args[:app_name]
+      @assets = args[:assets]
+      @styling = args[:styling]
+      @database = args[:database]
     end
 
     def template

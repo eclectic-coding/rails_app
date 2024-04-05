@@ -33,4 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "bootsnap", "~> 1.18", ">= 1.18.3" # used by rails new
   spec.add_dependency "thor", "~> 1.3", ">= 1.3.1"
   spec.add_dependency "tty-prompt", "~> 0.23.1"
+  spec.add_dependency "tty-config", "~> 0.6.0"
 end

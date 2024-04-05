@@ -5,7 +5,12 @@ module RailsApp
     attr_reader :options
 
     def initialize(args)
-      @options = args.flat_map { |arg| arg.split(" ") }
+      @options = args
+    end
+
+    def self.from_config(config_hash)
+      new_args = config_hash.map { |key, value| value.to_s }
+      new(new_args)
     end
 
     def app_name
@@ -17,15 +22,15 @@ module RailsApp
     end
 
     def default_styling
-      if @options.include?("tailwind")
-        "tailwind"
-      elsif @options.include?("bulma")
-        "bulma"
-      elsif @options.include?("postcss")
-        "postcss"
-      elsif @options.include?("sass")
+      if @options.any? { |option| option.end_with?("tailwind") }
+        "tailwind".strip
+      elsif @options.any? { |option| option.end_with?("bulma") }
+        "bulma".strip
+      elsif @options.any? { |option| option.end_with?("postcss") }
+        "postcss".strip
+      elsif @options.any? { |option| option.end_with?("sass") }
         "sass"
-      elsif @options.include?("bootstrap")
+      elsif @options.any? { |option| option.end_with?("bootstrap") }
         "bootstrap"
       else
         "bootstrap"
