@@ -33,7 +33,7 @@ module RailsApp
       elsif @options.any? { |option| option.end_with?("bootstrap") }
         "bootstrap"
       else
-        nil
+        "bootstrap"
       end
     end
 

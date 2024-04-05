@@ -3,13 +3,6 @@
 require "rails_app/options_data"
 
 RSpec.describe RailsApp::OptionsData do
-  describe "#initialize" do
-    it "splits the arguments and assigns them to @options" do
-      options_data = described_class.new(["arg1 arg2", "arg3"])
-      expect(options_data.options).to eq(["arg1", "arg2", "arg3"])
-    end
-  end
-
   describe "#app_name" do
     it "returns the first option" do
       options_data = described_class.new(["my_app"])

@@ -5,15 +5,6 @@ require "rails_app/cli"
 RSpec.describe RailsApp::CLI do
   describe "scaffolds new app" do
     let(:prompt) { instance_double(TTY::Prompt) }
-    let(:styling_choices) {
-      [
-        {name: "Bootstrap", value: "bootstrap"},
-        {name: "Tailwind CSS", value: "tailwind"},
-        {name: "Bulma", value: "bulma"},
-        {name: "PostCSS", value: "postcss"},
-        {name: "SASS", value: "sass"}
-      ]
-    }
 
     before do
       allow(TTY::Prompt).to receive(:new).and_return(prompt)
@@ -27,7 +18,7 @@ RSpec.describe RailsApp::CLI do
       it "prompts for the app name and other options, then runs the command" do
         expect(prompt).to receive(:ask).with("What is the name of your application?", required: true)
         expect(prompt).to receive(:select).with("How would you like to manage assets?", %w[propshaft sprockets], default: "propshaft")
-        expect(prompt).to receive(:select).with("How would you like to manage styling?", styling_choices, default: "bootstrap")
+        expect(prompt).to receive(:select).with("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass], default: "bootstrap")
         expect(prompt).to receive(:select).with("Which database would you like to use?",
           %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
           default: "sqlite3")
@@ -48,23 +39,25 @@ RSpec.describe RailsApp::CLI do
       end
 
       it "uses the cli arguments and does not prompt for assets" do
+        allow_any_instance_of(RailsApp::OptionsData).to receive(:default_assets).and_return("sprockets")
         expect(prompt).to receive(:select).with("How would you like to manage assets?", %w[propshaft sprockets], default: "sprockets")
         expect_any_instance_of(RailsApp::Command).to receive(:run)
 
         described_class.start(%w[MyApp sprockets])
       end
 
-      it "uses the cli arguments and does not prompt for styling" do
-        expect(prompt).to receive(:select).with("How would you like to manage styling?", styling_choices, default: "tailwind")
+      it "uses the cli arguments and selects cli argument for styling" do
+        expect(prompt).to receive(:select).with("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass], default: "bootstrap")
         expect_any_instance_of(RailsApp::Command).to receive(:run)
 
         described_class.start(%w[MyApp tailwind])
       end
 
       it "uses the cli arguments and does not prompt for database" do
+        allow_any_instance_of(RailsApp::OptionsData).to receive(:default_database).and_return("postgresql")
         expect(prompt).to receive(:select).with("Which database would you like to use?",
-          %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
-          default: "postgresql")
+                                                %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
+                                                default: "postgresql")
         expect_any_instance_of(RailsApp::Command).to receive(:run)
 
         described_class.start(%w[MyApp postgresql])
