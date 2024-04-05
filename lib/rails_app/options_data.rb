@@ -9,7 +9,7 @@ module RailsApp
     end
 
     def self.from_config(config_hash)
-      new_args = config_hash.map { |key, value| "#{value}" }
+      new_args = config_hash.map { |key, value| value.to_s }
       new(new_args)
     end
 

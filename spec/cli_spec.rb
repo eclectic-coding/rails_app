@@ -56,8 +56,8 @@ RSpec.describe RailsApp::CLI do
       it "uses the cli arguments and does not prompt for database" do
         allow_any_instance_of(RailsApp::OptionsData).to receive(:default_database).and_return("postgresql")
         expect(prompt).to receive(:select).with("Which database would you like to use?",
-                                                %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
-                                                default: "postgresql")
+          %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
+          default: "postgresql")
         expect_any_instance_of(RailsApp::Command).to receive(:run)
 
         described_class.start(%w[MyApp postgresql])

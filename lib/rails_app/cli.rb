@@ -21,8 +21,8 @@ module RailsApp
       assets = prompt.select("How would you like to manage assets?", %w[propshaft sprockets], default: options_data.default_assets)
       styling = prompt.select("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass], default: options_data.default_styling)
       database = prompt.select("Which database would you like to use?",
-                               %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
-                               default: options_data.default_database)
+        %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
+        default: options_data.default_database)
 
       # Collect all configuration options into a hash
       config_options = {
