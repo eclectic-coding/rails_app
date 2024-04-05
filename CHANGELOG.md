@@ -6,7 +6,9 @@
 
 **Implemented enhancements:**
 
+- setup `tty-config` to save a new config [\#24](https://github.com/eclectic-coding/rails_app/issues/24)
 - Add more tests [\#4](https://github.com/eclectic-coding/rails_app/issues/4)
+- Setup tty config to save a new config [\#25](https://github.com/eclectic-coding/rails_app/pull/25) ([eclectic-coding](https://github.com/eclectic-coding))
 - 4 add more tests [\#23](https://github.com/eclectic-coding/rails_app/pull/23) ([eclectic-coding](https://github.com/eclectic-coding))
 
 ## [0.7.0](https://github.com/eclectic-coding/rails_app/tree/0.7.0) (2024-04-04)
