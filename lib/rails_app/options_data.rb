@@ -27,6 +27,8 @@ module RailsApp
         "sass"
       elsif @options.include?("bootstrap")
         "bootstrap"
+      else
+        "bootstrap"
       end
     end
 
