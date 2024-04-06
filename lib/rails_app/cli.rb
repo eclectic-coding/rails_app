@@ -6,7 +6,6 @@ module RailsApp
   class CLI
     def self.start(args)
       prompt = TTY::Prompt.new
-
       options_data = OptionsData.new(args)
       config_file = ConfigFile.new
 
@@ -18,19 +17,7 @@ module RailsApp
         options_data = OptionsData.from_config(config_options)
       end
 
-      assets = prompt.select("How would you like to manage assets?", %w[propshaft sprockets], default: options_data.default_assets)
-      styling = prompt.select("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass], default: options_data.default_styling)
-      database = prompt.select("Which database would you like to use?",
-        %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
-        default: options_data.default_database)
-
-      # Collect all configuration options into a hash
-      config_options = {
-        app_name: app_name,
-        assets: assets,
-        styling: styling,
-        database: database
-      }
+      config_options = self.menu(app_name, options_data, prompt)
 
       # Ask the user if they wish to save their configuration
       if prompt.yes?("Do you wish to save your configuration?")
@@ -44,6 +31,16 @@ module RailsApp
       end
 
       Command.new(config_options).run
+    end
+
+    def self.menu(app_name, options_data, prompt)
+      assets = prompt.select("How would you like to manage assets?", %w[propshaft sprockets], default: options_data.default_assets)
+      styling = prompt.select("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass], default: options_data.default_styling)
+      database = prompt.select("Which database would you like to use?",
+                               %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
+                               default: options_data.default_database)
+
+      { app_name: app_name, assets: assets, styling: styling, database: database }
     end
   end
 end
