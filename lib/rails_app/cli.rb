@@ -11,26 +11,29 @@ module RailsApp
 
       app_name = options_data.app_name || prompt.ask("What is the name of your application?", required: true)
 
-      # Read the configuration and ask the user if they want to use it
+      # Read from existing configuration and ask the user if they want to use it
       config_options = config_file.read
       if config_options && prompt.yes?("Do you want to use this configuration? #{config_options}")
+        config_options["app_name"] = app_name
+        create_app(config_options)
+      else
+        # not using config display menu to user
         options_data = OptionsData.from_config(config_options)
-      end
+        config_options = self.menu(app_name, options_data, prompt)
 
-      config_options = self.menu(app_name, options_data, prompt)
-
-      # Ask the user if they wish to save their configuration
-      if prompt.yes?("Do you wish to save your configuration?")
-        # Iterate over the hash and set the configuration
-        config_options.each do |key, value|
-          next if key == :app_name
-          config_file.set(key, value)
+        # Ask the user if they wish to save their configuration
+        if prompt.yes?("Do you wish to save your configuration?")
+          # Iterate over the hash and set the configuration
+          config_options.each do |key, value|
+            next if key == :app_name
+            config_file.set(key, value)
+          end
+          config_file.write(force: true)
+          puts "Configuration saved successfully @ #{config_file.full_path}"
         end
-        config_file.write(force: true)
-        puts "Configuration saved successfully @ #{config_file.full_path}"
-      end
 
-      Command.new(config_options).run
+        create_app(config_options)
+      end
     end
 
     def self.menu(app_name, options_data, prompt)
@@ -41,6 +44,10 @@ module RailsApp
                                default: options_data.default_database)
 
       { app_name: app_name, assets: assets, styling: styling, database: database }
+    end
+
+    def self.create_app(args)
+      Command.new(args).run
     end
   end
 end
