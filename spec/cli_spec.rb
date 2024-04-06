@@ -5,63 +5,91 @@ require "rails_app/cli"
 RSpec.describe RailsApp::CLI do
   describe "scaffolds new app" do
     let(:prompt) { instance_double(TTY::Prompt) }
+    let(:config_file) { instance_double(RailsApp::ConfigFile) }
+    let(:options_data) { instance_double(RailsApp::OptionsData) }
 
     before do
       allow(TTY::Prompt).to receive(:new).and_return(prompt)
-      allow(prompt).to receive(:ask).and_return("MyApp")
-      allow(prompt).to receive(:yes?).and_return(true)
-      allow(prompt).to receive(:select).and_return("propshaft", "importmap")
-      allow_any_instance_of(RailsApp::Command).to receive(:run)
+      allow(RailsApp::ConfigFile).to receive(:new).and_return(config_file)
+      allow(RailsApp::OptionsData).to receive(:new).and_return(options_data)
     end
 
-    context "create new app with no cli arguments" do
-      it "prompts for the app name and other options, then runs the command" do
-        expect(prompt).to receive(:ask).with("What is the name of your application?", required: true)
-        expect(prompt).to receive(:select).with("How would you like to manage assets?", %w[propshaft sprockets], default: "propshaft")
-        expect(prompt).to receive(:select).with("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass], default: "bootstrap")
-        expect(prompt).to receive(:select).with("Which database would you like to use?",
-          %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
-          default: "sqlite3")
-        expect_any_instance_of(RailsApp::Command).to receive(:run)
+    describe '.start' do
+      context 'when config file exists and user wants to use it' do
+        before do
+          prompt = instance_double(TTY::Prompt)
+          allow(prompt).to receive(:yes?).and_return(true)
+          allow(TTY::Prompt).to receive(:new).and_return(prompt)
+          config_file = instance_double(RailsApp::ConfigFile)
+          allow(config_file).to receive(:read).and_return({ "app_name" => "test_app", "assets" => "propshaft", "styling" => "bootstrap", "database" => "postgresql" })
+          allow(RailsApp::ConfigFile).to receive(:new).and_return(config_file)
+          options_data = instance_double(RailsApp::OptionsData)
+          allow(options_data).to receive(:app_name).and_return("test_app")
+          allow(RailsApp::OptionsData).to receive(:new).and_return(options_data)
+        end
 
-        described_class.start([])
+        it 'creates an app with the existing configuration' do
+          expect(RailsApp::CLI).to receive(:create_app).with({ "app_name" => "test_app", "assets" => "propshaft", "styling" => "bootstrap", "database" => "postgresql" })
+          RailsApp::CLI.start({ "app_name" => "test_app", "assets" => "propshaft", "styling" => "bootstrap", "database" => "postgresql" })
+        end
+      end
+
+      context 'when config file does not exist or user does not want to use it' do
+        before do
+          prompt = instance_double(TTY::Prompt)
+          allow(prompt).to receive(:ask).and_return("test_app")
+          allow(prompt).to receive(:yes?).and_return(true)
+          allow(TTY::Prompt).to receive(:new).and_return(prompt)
+          config_file = instance_double(RailsApp::ConfigFile)
+          allow(config_file).to receive(:read).and_return(nil)
+          allow(config_file).to receive(:set)
+          allow(config_file).to receive(:write)
+          allow(config_file).to receive(:full_path).and_return("/path/to/config_file")
+          allow(RailsApp::ConfigFile).to receive(:new).and_return(config_file)
+          options_data = instance_double(RailsApp::OptionsData)
+          allow(options_data).to receive(:app_name).and_return("test_app")
+          allow(RailsApp::OptionsData).to receive(:new).and_return(options_data)
+        end
+
+        it 'creates an app with the new configuration' do
+          allow(RailsApp::CLI).to receive(:menu).and_return({ app_name: "test_app", assets: "sprockets", styling: "bootstrap", database: "postgresql" })
+          expect(RailsApp::CLI).to receive(:create_app).with({ app_name: "test_app", assets: "sprockets", styling: "bootstrap", database: "postgresql" })
+          RailsApp::CLI.start({ "app_name" => "test_app", "assets" => "sprockets", "styling" => "bootstrap", "database" => "postgresql" })
+        end
       end
     end
+  end
 
-    context "create new app with cli arguments" do
-      let(:options_data) { instance_double(RailsApp::OptionsData, app_name: "MyApp", default_assets: "propshaft", default_styling: "bootstrap", default_database: "sqlite3") }
+  describe '.menu' do
+    let(:prompt) { instance_double(TTY::Prompt) }
+    let(:options_data) { instance_double(RailsApp::OptionsData) }
 
-      it "uses the cli arguments and does not prompt for app name" do
-        expect(prompt).not_to receive(:ask)
-        expect_any_instance_of(RailsApp::Command).to receive(:run)
+    before do
+      prompt = instance_double(TTY::Prompt)
+      allow(TTY::Prompt).to receive(:new).and_return(prompt)
+      options_data = instance_double(RailsApp::OptionsData)
+      allow(options_data).to receive(:default_assets).and_return('sprockets')
+      allow(options_data).to receive(:default_styling).and_return('bootstrap')
+      allow(options_data).to receive(:default_database).and_return('postgresql')
+      allow(RailsApp::OptionsData).to receive(:new).and_return(options_data)
+    end
 
-        described_class.start(["MyApp"])
-      end
+    it 'returns a hash with the selected options' do
+      options_data = instance_double(RailsApp::OptionsData)
+      allow(options_data).to receive(:default_assets).and_return('sprockets')
+      allow(options_data).to receive(:default_styling).and_return('bootstrap')
+      allow(options_data).to receive(:default_database).and_return('postgresql')
+      allow(RailsApp::OptionsData).to receive(:new).and_return(options_data)
 
-      it "uses the cli arguments and does not prompt for assets" do
-        allow_any_instance_of(RailsApp::OptionsData).to receive(:default_assets).and_return("sprockets")
-        expect(prompt).to receive(:select).with("How would you like to manage assets?", %w[propshaft sprockets], default: "sprockets")
-        expect_any_instance_of(RailsApp::Command).to receive(:run)
+      allow(prompt).to receive(:select).with("How would you like to manage assets?", %w[propshaft sprockets], default: options_data.default_assets).and_return('sprockets')
+      allow(prompt).to receive(:select).with("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass], default: options_data.default_styling).and_return('bootstrap')
+      allow(prompt).to receive(:select).with("Which database would you like to use?",
+                                             %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
+                                             default: options_data.default_database).and_return('postgresql')
 
-        described_class.start(%w[MyApp sprockets])
-      end
+      result = RailsApp::CLI.menu('test_app', options_data, prompt)
 
-      it "uses the cli arguments and selects cli argument for styling" do
-        expect(prompt).to receive(:select).with("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass], default: "bootstrap")
-        expect_any_instance_of(RailsApp::Command).to receive(:run)
-
-        described_class.start(%w[MyApp tailwind])
-      end
-
-      it "uses the cli arguments and does not prompt for database" do
-        allow_any_instance_of(RailsApp::OptionsData).to receive(:default_database).and_return("postgresql")
-        expect(prompt).to receive(:select).with("Which database would you like to use?",
-          %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
-          default: "postgresql")
-        expect_any_instance_of(RailsApp::Command).to receive(:run)
-
-        described_class.start(%w[MyApp postgresql])
-      end
+      expect(result).to eq({ app_name: 'test_app', assets: 'sprockets', styling: 'bootstrap', database: 'postgresql' })
     end
   end
 end
