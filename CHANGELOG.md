@@ -1,5 +1,18 @@
 # Changelog
 
+## [Unreleased](https://github.com/eclectic-coding/rails_app/tree/HEAD)
+
+[Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.8.0...HEAD)
+
+**Implemented enhancements:**
+
+- Read users existing .railsrc for preferences [\#1](https://github.com/eclectic-coding/rails_app/issues/1)
+
+**Fixed bugs:**
+
+- CLI Menu should be bypassed when using saved configuration [\#28](https://github.com/eclectic-coding/rails_app/issues/28)
+- CLI menu should be bypassed when using saved configuration [\#29](https://github.com/eclectic-coding/rails_app/pull/29) ([eclectic-coding](https://github.com/eclectic-coding))
+
 ## [0.8.0](https://github.com/eclectic-coding/rails_app/tree/0.8.0) (2024-04-05)
 
 [Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.7.0...0.8.0)
