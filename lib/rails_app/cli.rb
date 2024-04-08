@@ -66,8 +66,8 @@ module RailsApp
         q.negative "No"
       end
 
-      { assets: assets, styling: styling, database: database, action_mailer: action_mailer, action_mailbox: action_mailbox,
-        action_text: action_text, action_storage: action_storage, action_cable: action_cable}
+      {assets: assets, styling: styling, database: database, action_mailer: action_mailer, action_mailbox: action_mailbox,
+       action_text: action_text, action_storage: action_storage, action_cable: action_cable}
     end
 
     def self.create_app(app_name, args)
