@@ -60,8 +60,7 @@ If a file has been previously saved, you will be prompted if you want to use:
 ![](assets/screenshot_cli_readconfig.png)
 
 
-Then your options will be pre-selected:
-![](assets/screenshot_cli_useconfig.png)
+The CLI menu will then be bypassed and the application with be created with your presets.
 
 # Features
 
