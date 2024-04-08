@@ -66,12 +66,18 @@ RSpec.describe RailsApp::CLI do
       allow(prompt).to receive(:select).with("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass]).and_return("bootstrap")
       allow(prompt).to receive(:select).with("Which database would you like to use?",
         %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc]).and_return("postgresql")
+      allow(prompt).to receive(:yes?).with("Would you like to SKIP Action Mailer?").and_return(false)
+      allow(prompt).to receive(:yes?).with("Would you like to SKIP Action Mailbox?").and_return(false)
+      allow(prompt).to receive(:yes?).with("Would you like to SKIP Action Text?").and_return(false)
+      allow(prompt).to receive(:yes?).with("Would you like to SKIP Active Storage?").and_return(false)
+      allow(prompt).to receive(:yes?).with("Would you like to SKIP Active Cable?").and_return(false)
     end
 
     it "returns a hash with the selected options" do
-      result = RailsApp::CLI.menu("test_app", prompt)
+      result = RailsApp::CLI.menu(prompt)
 
-      expect(result).to eq({app_name: "test_app", assets: "sprockets", styling: "bootstrap", database: "postgresql"})
+      expect(result).to eq({assets: "sprockets", styling: "bootstrap", database: "postgresql",
+                            action_mailer: false, action_mailbox: false, action_text: false, action_storage: false, action_cable: false})
     end
   end
 end

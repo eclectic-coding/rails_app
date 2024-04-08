@@ -7,7 +7,11 @@ module RailsApp
       @assets = args[:assets]
       @styling = args[:styling]
       @database = args[:database]
-      puts "Command: #{@app_name} #{args[:app_name]}"
+      @skip_action_mailer = args[:action_mailer]
+      @skip_action_mailbox = args[:action_mailbox]
+      @skip_action_text = args[:action_text]
+      @skip_action_storage = args[:action_storage]
+      @skip_action_cable = args[:action_cable]
     end
 
     def template
@@ -15,14 +19,34 @@ module RailsApp
     end
 
     def run
-      command = "rails new #{@app_name} --no-rc #{skip_spring} #{database_adapter} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} -m #{template}"
+      command = "rails new #{@app_name} --no-rc #{skip_spring} #{skip_action_mailer} #{skip_action_mailbox} #{skip_action_text} #{skip_action_text} #{skip_action_cable} #{database_adapter} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} -m #{template}"
       command.squeeze!(" ")
-      # puts command
+      puts command
       system(command)
     end
 
     def skip_spring
       "--skip-spring"
+    end
+
+    def skip_action_mailer
+      "--skip-action-mailer" if @skip_action_mailer == true
+    end
+
+    def skip_action_mailbox
+      "--skip-action-mailbox" if @skip_action_mailbox == true
+    end
+
+    def skip_action_text
+      "--skip-action-text" if @skip_action_text == true
+    end
+
+    def skip_action_storage
+      "--skip-active-storage" if @skip_action_storage == true
+    end
+
+    def skip_action_cable
+      "--skip-action-cable" if @skip_action_cable == true
     end
 
     def database_adapter

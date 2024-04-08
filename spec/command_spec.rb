@@ -3,7 +3,7 @@
 require "rails_app/command"
 
 RSpec.describe RailsApp::Command do
-  let(:args) { {assets: "sprockets", styling: "tailwindcss", database: "sqlite3"} }
+  let(:args) { { assets: "sprockets", styling: "tailwindcss", database: "sqlite3" } }
   describe "#template" do
     it "returns the path to the template file" do
       command = RailsApp::Command.new("my_app", args)
@@ -25,6 +25,23 @@ RSpec.describe RailsApp::Command do
     it "returns the skip spring option" do
       command = RailsApp::Command.new("my_app", args)
       expect(command.skip_spring).to eq("--skip-spring")
+    end
+  end
+
+  describe "#skip_action_mailer" do
+    context "when action mailer is not skipped" do
+      it "returns nil" do
+        command = RailsApp::Command.new("my_app", args)
+        expect(command.skip_action_mailer).to be_nil
+      end
+    end
+
+    context "when action mailer is skipped" do
+      it "returns the skip action mailer option" do
+        mailer_args = { assets: "sprockets", styling: "tailwindcss", database: "sqlite3", action_mailer: true }
+        command = RailsApp::Command.new("my_app", mailer_args)
+        expect(command.skip_action_mailer).to eq("--skip-action-mailer")
+      end
     end
   end
 
@@ -61,7 +78,7 @@ RSpec.describe RailsApp::Command do
 
     context "when the assets are not sprockets" do
       it "returns the asset management option" do
-        new_args = {assets: "propshaft", styling: "tailwindcss", database: "sqlite3"}
+        new_args = { assets: "propshaft", styling: "tailwindcss", database: "sqlite3" }
         command = RailsApp::Command.new("my_app", new_args)
         expect(command.asset_management).to eq("-a propshaft")
       end
@@ -71,7 +88,7 @@ RSpec.describe RailsApp::Command do
   describe "#styling_framework" do
     context "when styling is bulma" do
       it "returns the styling framework option" do
-        bulma_args = {assets: "sprockets", styling: "bulma", database: "sqlite3"}
+        bulma_args = { assets: "sprockets", styling: "bulma", database: "sqlite3" }
         command = RailsApp::Command.new("my_app", bulma_args)
         expect(command.styling_framework).to eq("--css bulma")
       end
@@ -86,14 +103,14 @@ RSpec.describe RailsApp::Command do
 
     context "when styling is postcss" do
       it "returns the styling framework option" do
-        command = RailsApp::Command.new("my_app", {assets: "sprockets", styling: "postcss", database: "sqlite3"})
+        command = RailsApp::Command.new("my_app", { assets: "sprockets", styling: "postcss", database: "sqlite3" })
         expect(command.styling_framework).to eq("--css postcss")
       end
     end
 
     context "when styling is sass" do
       it "returns the styling framework option" do
-        command = RailsApp::Command.new("my_app", {assets: "sprockets", styling: "sass", database: "sqlite3"})
+        command = RailsApp::Command.new("my_app", { assets: "sprockets", styling: "sass", database: "sqlite3" })
         expect(command.styling_framework).to eq("--css sass")
       end
     end
@@ -101,7 +118,7 @@ RSpec.describe RailsApp::Command do
 
   describe "#testing_framework" do
     it "returns the testing framework option" do
-      command = RailsApp::Command.new("my_app", {assets: "sprockets", styling: "tailwindcss", database: "sqlite3"})
+      command = RailsApp::Command.new("my_app", { assets: "sprockets", styling: "tailwindcss", database: "sqlite3" })
       expect(command.testing_framework).to eq("-T")
     end
   end
