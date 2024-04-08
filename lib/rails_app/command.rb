@@ -2,11 +2,12 @@ module RailsApp
   class Command
     attr_reader :app_name, :assets, :styling, :database
 
-    def initialize(args)
-      @app_name = args[:app_name]
+    def initialize(app_name, args)
+      @app_name = app_name
       @assets = args[:assets]
       @styling = args[:styling]
       @database = args[:database]
+      puts "Command: #{@app_name} #{args[:app_name]}"
     end
 
     def template
@@ -16,7 +17,7 @@ module RailsApp
     def run
       command = "rails new #{@app_name} --no-rc #{skip_spring} #{database_adapter} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} -m #{template}"
       command.squeeze!(" ")
-      puts command
+      # puts command
       system(command)
     end
 

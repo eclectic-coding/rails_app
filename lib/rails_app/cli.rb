@@ -5,6 +5,7 @@ require "tty-prompt"
 module RailsApp
   class CLI
     def self.start(args)
+      puts "args: #{args}"
       prompt = TTY::Prompt.new
       options_data = OptionsData.new(args)
       config_file = ConfigFile.new
@@ -13,13 +14,13 @@ module RailsApp
 
       # Read from existing configuration and ask the user if they want to use it
       config_options = config_file.read
+
       if config_options && prompt.yes?("Do you want to use this configuration? #{config_options}")
-        config_options["app_name"] = app_name
-        create_app(config_options)
+
+        create_app(app_name, config_options) # standard:disable Style/IdenticalConditionalBranches
       else
         # not using config display menu to user
-        options_data = OptionsData.from_config(config_options)
-        config_options = self.menu(app_name, options_data, prompt)
+        config_options = menu(app_name, prompt)
 
         # Ask the user if they wish to save their configuration
         if prompt.yes?("Do you wish to save your configuration?")
@@ -32,22 +33,22 @@ module RailsApp
           puts "Configuration saved successfully @ #{config_file.full_path}"
         end
 
-        create_app(config_options)
+        puts "config_options: #{config_options}"
+        create_app(app_name, config_options) # standard:disable Style/IdenticalConditionalBranches
       end
     end
 
-    def self.menu(app_name, options_data, prompt)
-      assets = prompt.select("How would you like to manage assets?", %w[propshaft sprockets], default: options_data.default_assets)
-      styling = prompt.select("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass], default: options_data.default_styling)
+    def self.menu(app_name, prompt)
+      assets = prompt.select("How would you like to manage assets?", %w[propshaft sprockets])
+      styling = prompt.select("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass])
       database = prompt.select("Which database would you like to use?",
-                               %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc],
-                               default: options_data.default_database)
+        %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc])
 
-      { app_name: app_name, assets: assets, styling: styling, database: database }
+      {app_name: app_name, assets: assets, styling: styling, database: database}
     end
 
-    def self.create_app(args)
-      Command.new(args).run
+    def self.create_app(app_name, args)
+      Command.new(app_name, args).run
     end
   end
 end

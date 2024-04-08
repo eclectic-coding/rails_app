@@ -29,7 +29,7 @@ module RailsApp
 
     def read
       @config.read if exist?
-      @config.to_h || {}
+      @config.to_h
     end
   end
 end
