@@ -8,11 +8,6 @@ module RailsApp
       @options = args
     end
 
-    def self.from_config(config_hash)
-      new_args = config_hash.map { |key, value| value.to_s }
-      new(new_args)
-    end
-
     def app_name
       @options[0]
     end
