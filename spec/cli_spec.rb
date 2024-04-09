@@ -60,18 +60,55 @@ RSpec.describe RailsApp::CLI do
 
   describe ".menu" do
     let(:prompt) { instance_double(TTY::Prompt) }
+    let(:options_data) { instance_double(RailsApp::OptionsData) }
 
     before do
-      allow(prompt).to receive(:select).with("How would you like to manage assets?", %w[propshaft sprockets]).and_return("sprockets")
-      allow(prompt).to receive(:select).with("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass]).and_return("bootstrap")
-      allow(prompt).to receive(:select).with("Which database would you like to use?",
-        %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc]).and_return("postgresql")
+      allow(TTY::Prompt).to receive(:new).and_return(prompt)
+      allow(RailsApp::OptionsData).to receive(:new).and_return(options_data)
     end
 
-    it "returns a hash with the selected options" do
-      result = RailsApp::CLI.menu("test_app", prompt)
+    it "returns user selected options" do
+      allow(prompt).to receive(:select).and_return("propshaft", "bootstrap", "postgresql")
+      allow(prompt).to receive(:yes?).and_return(false)
 
-      expect(result).to eq({app_name: "test_app", assets: "sprockets", styling: "bootstrap", database: "postgresql"})
+      expected_options = {
+        assets: "propshaft",
+        styling: "bootstrap",
+        database: "postgresql",
+        skip_spring: false,
+        action_mailer: false,
+        action_mailbox: false,
+        action_text: false,
+        action_storage: false,
+        action_cable: false
+      }
+
+      expect(RailsApp::CLI.menu(prompt)).to eq(expected_options)
+    end
+  end
+
+  describe ".create_app" do
+    let(:command) { instance_double(RailsApp::Command) }
+
+    before do
+      allow(RailsApp::Command).to receive(:new).and_return(command)
+    end
+
+    it "runs the command to create a new app" do
+      app_name = "test_app"
+      args = {
+        assets: "propshaft",
+        styling: "bootstrap",
+        database: "postgresql",
+        action_mailer: false,
+        action_mailbox: false,
+        action_text: false,
+        action_storage: false,
+        action_cable: false
+      }
+
+      expect(command).to receive(:run)
+      RailsApp::CLI.create_app(app_name, args)
     end
   end
 end

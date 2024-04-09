@@ -13,6 +13,8 @@ module RailsApp
     end
 
     def default_assets
+      # puts "@options: #{@options.include?("sprockets")}"
+
       @options.include?("sprockets") ? "sprockets" : "propshaft"
     end
 
@@ -54,6 +56,26 @@ module RailsApp
       else
         "sqlite3"
       end
+    end
+
+    def default_action_mailer
+      @options.include?("skip_action_mailer")
+    end
+
+    def default_action_mailbox
+      @options.include?("skip_action_mailbox")
+    end
+
+    def default_action_text
+      @options.include?("skip_action_text")
+    end
+
+    def default_action_storage
+      @options.include?("skip_action_storage")
+    end
+
+    def default_action_cable
+      @options.include?("skip_action_cable")
     end
   end
 end

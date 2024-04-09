@@ -14,7 +14,7 @@ RSpec.describe RailsApp::Command do
   describe "#run" do
     it "executes the correct system command" do
       command = RailsApp::Command.new("my_app", args)
-      expected_command = "rails new my_app --no-rc --skip-spring -j esbuild --css tailwindcss -T -m #{command.template}"
+      expected_command = "rails new my_app --no-rc -j esbuild --css tailwindcss -T -m #{command.template}"
 
       expect(command).to receive(:system).with(expected_command)
       command.run
@@ -24,7 +24,58 @@ RSpec.describe RailsApp::Command do
   describe "#skip_spring" do
     it "returns the skip spring option" do
       command = RailsApp::Command.new("my_app", args)
-      expect(command.skip_spring).to eq("--skip-spring")
+      expect(command.skip_spring).not_to eq("--skip-spring")
+    end
+  end
+
+  describe "#skip_action_mailer" do
+    context "when action mailer is not skipped" do
+      it "returns nil" do
+        command = RailsApp::Command.new("my_app", args)
+        expect(command.skip_action_mailer).to be_nil
+      end
+    end
+
+    context "when action mailer is skipped" do
+      it "returns the skip action mailer option" do
+        mailer_args = {assets: "sprockets", styling: "tailwindcss", database: "sqlite3", action_mailer: true}
+        command = RailsApp::Command.new("my_app", mailer_args)
+        expect(command.skip_action_mailer).to eq("--skip-action-mailer")
+      end
+    end
+  end
+
+  describe "#skip_action_mailbox" do
+    context "when action mailbox is not skipped" do
+      it "returns nil" do
+        command = RailsApp::Command.new("my_app", args)
+        expect(command.skip_action_mailbox).to be_nil
+      end
+    end
+
+    context "when action mailbox is skipped" do
+      it "returns the skip action mailbox option" do
+        mailbox_args = {assets: "sprockets", styling: "tailwindcss", database: "sqlite3", action_mailbox: true}
+        command = RailsApp::Command.new("my_app", mailbox_args)
+        expect(command.skip_action_mailbox).to eq("--skip-action-mailbox")
+      end
+    end
+  end
+
+  describe "#skip_action_storage" do
+    context "when action storage is not skipped" do
+      it "returns nil" do
+        command = RailsApp::Command.new("my_app", args)
+        expect(command.skip_action_storage).to be_nil
+      end
+    end
+
+    context "when action storage is skipped" do
+      it "returns the skip action storage option" do
+        storage_args = {assets: "sprockets", styling: "tailwindcss", database: "sqlite3", action_storage: true}
+        command = RailsApp::Command.new("my_app", storage_args)
+        expect(command.skip_action_storage).to eq("--skip-active-storage")
+      end
     end
   end
 

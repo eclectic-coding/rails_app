@@ -81,4 +81,64 @@ RSpec.describe RailsApp::OptionsData do
       expect(options_data.default_database).to eq("sqlite3")
     end
   end
+
+  describe "#default_action_mailer" do
+    it "returns true if the option is included" do
+      options_data = described_class.new(["skip_action_mailer"])
+      expect(options_data.default_action_mailer).to eq(true)
+    end
+
+    it "returns false if the option is not included" do
+      options_data = described_class.new(["not_an_option"])
+      expect(options_data.default_action_mailer).to eq(false)
+    end
+  end
+
+  describe "#default_action_mailbox" do
+    it "returns true if the option is included" do
+      options_data = described_class.new(["skip_action_mailbox"])
+      expect(options_data.default_action_mailbox).to eq(true)
+    end
+
+    it "returns false if the option is not included" do
+      options_data = described_class.new(["not_an_option"])
+      expect(options_data.default_action_mailbox).to eq(false)
+    end
+  end
+
+  describe "#default_action_text" do
+    it "returns true if the option is included" do
+      options_data = described_class.new(["skip_action_text"])
+      expect(options_data.default_action_text).to eq(true)
+    end
+
+    it "returns false if the option is not included" do
+      options_data = described_class.new(["not_an_option"])
+      expect(options_data.default_action_text).to eq(false)
+    end
+  end
+
+  describe "#default_action_storage" do
+    it "returns true if the option is included" do
+      options_data = described_class.new(["skip_action_storage"])
+      expect(options_data.default_action_storage).to eq(true)
+    end
+
+    it "returns false if the option is not included" do
+      options_data = described_class.new(["not_an_option"])
+      expect(options_data.default_action_storage).to eq(false)
+    end
+  end
+
+  describe "#default_action_cable" do
+    it "returns true if the option is included" do
+      options_data = described_class.new(["skip_action_cable"])
+      expect(options_data.default_action_cable).to eq(true)
+    end
+
+    it "returns false if the option is not included" do
+      options_data = described_class.new(["not_an_option"])
+      expect(options_data.default_action_cable).to eq(false)
+    end
+  end
 end
