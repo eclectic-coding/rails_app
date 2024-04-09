@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/eclectic-coding/rails_app/tree/HEAD)
+## [0.9.0](https://github.com/eclectic-coding/rails_app/tree/0.9.0) (2024-04-09)
 
-[Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.8.1...HEAD)
+[Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.8.1...0.9.0)
 
 **Implemented enhancements:**
 
