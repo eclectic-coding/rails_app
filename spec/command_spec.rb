@@ -45,6 +45,40 @@ RSpec.describe RailsApp::Command do
     end
   end
 
+  describe "#skip_action_mailbox" do
+    context "when action mailbox is not skipped" do
+      it "returns nil" do
+        command = RailsApp::Command.new("my_app", args)
+        expect(command.skip_action_mailbox).to be_nil
+      end
+    end
+
+    context "when action mailbox is skipped" do
+      it "returns the skip action mailbox option" do
+        mailbox_args = {assets: "sprockets", styling: "tailwindcss", database: "sqlite3", action_mailbox: true}
+        command = RailsApp::Command.new("my_app", mailbox_args)
+        expect(command.skip_action_mailbox).to eq("--skip-action-mailbox")
+      end
+    end
+  end
+
+  describe "#skip_action_storage" do
+    context "when action storage is not skipped" do
+      it "returns nil" do
+        command = RailsApp::Command.new("my_app", args)
+        expect(command.skip_action_storage).to be_nil
+      end
+    end
+
+    context "when action storage is skipped" do
+      it "returns the skip action storage option" do
+        storage_args = {assets: "sprockets", styling: "tailwindcss", database: "sqlite3", action_storage: true}
+        command = RailsApp::Command.new("my_app", storage_args)
+        expect(command.skip_action_storage).to eq("--skip-active-storage")
+      end
+    end
+  end
+
   describe "#database_adapter" do
     context "when the database is sqlite3" do
       it "returns nil" do

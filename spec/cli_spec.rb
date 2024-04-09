@@ -60,24 +60,54 @@ RSpec.describe RailsApp::CLI do
 
   describe ".menu" do
     let(:prompt) { instance_double(TTY::Prompt) }
+    let(:options_data) { instance_double(RailsApp::OptionsData) }
 
     before do
-      allow(prompt).to receive(:select).with("How would you like to manage assets?", %w[propshaft sprockets]).and_return("sprockets")
-      allow(prompt).to receive(:select).with("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass]).and_return("bootstrap")
-      allow(prompt).to receive(:select).with("Which database would you like to use?",
-        %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc]).and_return("postgresql")
-      allow(prompt).to receive(:yes?).with("Would you like to SKIP Action Mailer?").and_return(false)
-      allow(prompt).to receive(:yes?).with("Would you like to SKIP Action Mailbox?").and_return(false)
-      allow(prompt).to receive(:yes?).with("Would you like to SKIP Action Text?").and_return(false)
-      allow(prompt).to receive(:yes?).with("Would you like to SKIP Active Storage?").and_return(false)
-      allow(prompt).to receive(:yes?).with("Would you like to SKIP Active Cable?").and_return(false)
+      allow(TTY::Prompt).to receive(:new).and_return(prompt)
+      allow(RailsApp::OptionsData).to receive(:new).and_return(options_data)
     end
 
-    it "returns a hash with the selected options" do
-      result = RailsApp::CLI.menu(prompt)
+    it "returns user selected options" do
+      allow(prompt).to receive(:select).and_return("propshaft", "bootstrap", "postgresql")
+      allow(prompt).to receive(:yes?).and_return(false)
 
-      expect(result).to eq({assets: "sprockets", styling: "bootstrap", database: "postgresql",
-                            action_mailer: false, action_mailbox: false, action_text: false, action_storage: false, action_cable: false})
+      expected_options = {
+        assets: "propshaft",
+        styling: "bootstrap",
+        database: "postgresql",
+        action_mailer: false,
+        action_mailbox: false,
+        action_text: false,
+        action_storage: false,
+        action_cable: false
+      }
+
+      expect(RailsApp::CLI.menu(prompt)).to eq(expected_options)
+    end
+  end
+
+  describe ".create_app" do
+    let(:command) { instance_double(RailsApp::Command) }
+
+    before do
+      allow(RailsApp::Command).to receive(:new).and_return(command)
+    end
+
+    it "runs the command to create a new app" do
+      app_name = "test_app"
+      args = {
+        assets: "propshaft",
+        styling: "bootstrap",
+        database: "postgresql",
+        action_mailer: false,
+        action_mailbox: false,
+        action_text: false,
+        action_storage: false,
+        action_cable: false
+      }
+
+      expect(command).to receive(:run)
+      RailsApp::CLI.create_app(app_name, args)
     end
   end
 end
