@@ -46,11 +46,17 @@ I few things to note:
 
 If you use this syntax, the template will not prompt you the application name, and subsequent options will be preselected for you.
 
-Right not this syntax only supports the following options:
+Right now this syntax only supports the following options:
 - app name
 - assets pipeline
 - styling
 - database
+- skip spring
+- skip action mailer
+- skip action mailbox
+- skip action text
+- skip active storage
+- skip action cable
 
 More options will be added in future releases.
 
@@ -65,7 +71,10 @@ The CLI menu will then be bypassed and the application with be created with your
 # Features
 
 ## Authentication 
-documentation coming soon
+Authentication is set up currently using Devise with the following options:
+- User model with email and password
+- The User model is named `User` but will be configurable in the future
+- A `admin` boolean field is added to the User model
 
 ## Code Quality Tools
 The template includes the following code quality tools:
