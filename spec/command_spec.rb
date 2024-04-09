@@ -14,7 +14,7 @@ RSpec.describe RailsApp::Command do
   describe "#run" do
     it "executes the correct system command" do
       command = RailsApp::Command.new("my_app", args)
-      expected_command = "rails new my_app --no-rc --skip-spring -j esbuild --css tailwindcss -T -m #{command.template}"
+      expected_command = "rails new my_app --no-rc -j esbuild --css tailwindcss -T -m #{command.template}"
 
       expect(command).to receive(:system).with(expected_command)
       command.run
@@ -24,7 +24,7 @@ RSpec.describe RailsApp::Command do
   describe "#skip_spring" do
     it "returns the skip spring option" do
       command = RailsApp::Command.new("my_app", args)
-      expect(command.skip_spring).to eq("--skip-spring")
+      expect(command.skip_spring).not_to eq("--skip-spring")
     end
   end
 

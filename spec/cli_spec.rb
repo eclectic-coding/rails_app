@@ -75,6 +75,7 @@ RSpec.describe RailsApp::CLI do
         assets: "propshaft",
         styling: "bootstrap",
         database: "postgresql",
+        skip_spring: false,
         action_mailer: false,
         action_mailbox: false,
         action_text: false,

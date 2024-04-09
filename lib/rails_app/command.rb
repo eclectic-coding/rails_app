@@ -8,6 +8,7 @@ module RailsApp
       @assets = args[:assets]
       @styling = args[:styling]
       @database = args[:database]
+      @skip_spring = args[:skip_spring]
       @skip_action_mailer = args[:action_mailer]
       @skip_action_mailbox = args[:action_mailbox]
       @skip_action_text = args[:action_text]
@@ -27,7 +28,7 @@ module RailsApp
     end
 
     def skip_spring
-      "--skip-spring"
+      "--skip-spring" if @skip_spring == true
     end
 
     def skip_action_mailer
