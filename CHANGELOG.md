@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased](https://github.com/eclectic-coding/rails_app/tree/HEAD)
+
+[Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.8.1...HEAD)
+
+**Implemented enhancements:**
+
+- Add additional flags to CLI [\#26](https://github.com/eclectic-coding/rails_app/issues/26)
+- Add additional flags to cli [\#30](https://github.com/eclectic-coding/rails_app/pull/30) ([eclectic-coding](https://github.com/eclectic-coding))
+
 ## [0.8.1](https://github.com/eclectic-coding/rails_app/tree/0.8.1) (2024-04-08)
 
 [Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.8.0...0.8.1)
