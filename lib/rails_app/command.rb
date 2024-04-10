@@ -18,14 +18,18 @@ module RailsApp
     end
 
     def template
-      File.join(__dir__, "template", "template_esbuild.rb")
+      if @bundling == "esbuild"
+        File.join(__dir__, "template", "template_esbuild.rb")
+      else
+        File.join(__dir__, "template", "template_importmaps.rb")
+      end
     end
 
     def run
       command = "rails new #{@app_name} --no-rc #{skip_spring} #{skip_action_mailer} #{skip_action_mailbox} #{skip_action_text} #{skip_action_text} #{skip_action_cable} #{database_adapter} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} -m #{template}"
       command.squeeze!(" ")
-      # puts command
-      system(command)
+      puts command
+      # system(command)
     end
 
     def skip_spring
@@ -57,7 +61,9 @@ module RailsApp
     end
 
     def javascript_bundling
-      "-j esbuild"
+      if @bundling != "importmap"
+        "-j #{@bundling}"
+      end
     end
 
     def asset_management
@@ -65,6 +71,8 @@ module RailsApp
     end
 
     def styling_framework
+      return if @bundling == "importmap"
+
       "--css #{@styling}"
     end
 

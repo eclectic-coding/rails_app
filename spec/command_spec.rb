@@ -3,7 +3,7 @@
 require "rails_app/command"
 
 RSpec.describe RailsApp::Command do
-  let(:args) { {assets: "sprockets", styling: "tailwindcss", database: "sqlite3"} }
+  let(:args) { {assets: "sprockets", bundling: "esbuild", styling: "tailwindcss", database: "sqlite3"} }
   describe "#template" do
     it "returns the path to the template file" do
       command = RailsApp::Command.new("my_app", args)

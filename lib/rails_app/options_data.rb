@@ -13,16 +13,14 @@ module RailsApp
     end
 
     def default_assets
-      # puts "@options: #{@options.include?("sprockets")}"
-
       @options.include?("sprockets") ? "sprockets" : "propshaft"
     end
 
     def default_bundling
       if @options.include?("esbuild")
         "esbuild"
-      elsif @options.include?("importmaps")
-        "importmaps"
+      elsif @options.include?("importmap")
+        "importmap"
       else
         "esbuild"
       end
@@ -49,7 +47,8 @@ module RailsApp
         "postgresql"
       elsif @options.include?("mysql")
         "mysql"
-      elsif @options.include?("trilogy")
+      elsif @options.include?("trilogy"
+      )
         "trilogy"
       elsif @options.include?("oracle")
         "oracle"
