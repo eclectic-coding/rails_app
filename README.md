@@ -7,11 +7,10 @@ RailsApp is a gem that provides a simple way to create a new Rails application w
 
 The initial release of this gem is an opinionated template that includes the following dependencies and settings:
 - Esbuild for JavaScript bundling
-- Bootstrap for CSS styling
 - RSpec for testing
 - Code quality tools: Rubocop, Brakeman, and Bundler Audit
 
-The initial release of this gem **v.0.1.0** is starting with my personal preferences and a Rails template I have developed locally. I plan to expand the template to include more options and configurations with future releases which will make this template less opinionated.
+The initial release of this gem **v.0.1.0** started with my personal preferences and a Rails template I have developed locally. The gem has evolved with more user options and configurations, with the goal in future releases to make a less opinionated template.
 
 ## Installation
 Install globally:
@@ -58,7 +57,7 @@ Right now this syntax only supports the following options:
 - skip active storage
 - skip action cable
 
-More options will be added in future releases.
+More options will be added in future releases, if there is enough interest.
 
 ## Configuration
 **NEW** Starting with release `v. 0.8.0`, you can save your preferred defaults to you users home directory (`rails_aap-config.yml`).
