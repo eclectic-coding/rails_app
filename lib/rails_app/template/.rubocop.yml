@@ -3,3 +3,42 @@ inherit_gem:
   rubocop-rails-omakase: rubocop.yml
 
 # Your own specialized rules go here
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.2
+  Exclude:
+    - bin/**/*
+    - config/**/*
+    - db/**/*.rb
+    - lib/**/*
+    - node_modules/**/*
+    - script/**/*
+    - spec/spec_helper.rb
+    - tmp/**/*
+    - vendor/**/*
+
+Layout/AccessModifierIndentation:
+  Enabled: true
+  EnforcedStyle: indent
+
+Layout/EmptyLinesAroundAccessModifier:
+  Enabled: true
+  EnforcedStyle: around
+
+Layout/EmptyLineBetweenDefs:
+  Enabled: true
+  NumberOfEmptyLines: 1
+
+Layout/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: normal
+
+Layout/IndentationWidth:
+  Width: 2
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
+
+Style/UnlessElse:
+  Enabled: true
