@@ -27,6 +27,7 @@ module RailsApp
 
     def self.menu(prompt, option_data = nil)
       assets = prompt.select("How would you like to manage assets?", %w[propshaft sprockets], default: option_data&.default_assets)
+      bundling = prompt.select("How would you like to manage bundling?", %w[esbuild importmaps], default: option_data&.default_bundling)
       styling = prompt.select("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass], default: option_data&.default_styling)
       database = prompt.select("Which database would you like to use?", %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc], default: option_data&.default_database)
       skip_spring = prompt.yes?("Would you like to SKIP spring?", default: option_data&.default_action_mailer)
@@ -36,7 +37,7 @@ module RailsApp
       action_storage = prompt.yes?("Would you like to SKIP Active Storage?", default: option_data&.default_action_storage)
       action_cable = prompt.yes?("Would you like to SKIP Active Cable?", default: option_data&.default_action_cable)
 
-      {assets: assets, styling: styling, database: database, skip_spring: skip_spring, action_mailer: action_mailer,
+      {assets: assets, styling: styling, bundling: bundling, database: database, skip_spring: skip_spring, action_mailer: action_mailer,
        action_mailbox: action_mailbox, action_text: action_text, action_storage: action_storage, action_cable: action_cable}
     end
 

@@ -6,6 +6,7 @@ module RailsApp
       # puts "args: #{args}"
       @app_name = app_name
       @assets = args[:assets]
+      @bundling = args[:bundling]
       @styling = args[:styling]
       @database = args[:database]
       @skip_spring = args[:skip_spring]
@@ -17,7 +18,7 @@ module RailsApp
     end
 
     def template
-      File.join(__dir__, "template", "template.rb")
+      File.join(__dir__, "template", "template_esbuild.rb")
     end
 
     def run

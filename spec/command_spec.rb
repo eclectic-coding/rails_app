@@ -7,7 +7,7 @@ RSpec.describe RailsApp::Command do
   describe "#template" do
     it "returns the path to the template file" do
       command = RailsApp::Command.new("my_app", args)
-      expect(command.template).to eq(File.expand_path("../lib/rails_app/template/template.rb", __dir__))
+      expect(command.template).to eq(File.expand_path("../lib/rails_app/template/template_esbuild.rb", __dir__))
     end
   end
 

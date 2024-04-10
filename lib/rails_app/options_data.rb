@@ -18,6 +18,16 @@ module RailsApp
       @options.include?("sprockets") ? "sprockets" : "propshaft"
     end
 
+    def default_bundling
+      if @options.include?("esbuild")
+        "esbuild"
+      elsif @options.include?("importmaps")
+        "importmaps"
+      else
+        "esbuild"
+      end
+    end
+
     def default_styling
       if @options.any? { |option| option.end_with?("tailwind") }
         "tailwind".strip
