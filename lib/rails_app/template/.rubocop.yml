@@ -12,7 +12,6 @@ AllCops:
     - db/**/*.rb
     - lib/**/*
     - node_modules/**/*
-    - script/**/*
     - spec/spec_helper.rb
     - tmp/**/*
     - vendor/**/*

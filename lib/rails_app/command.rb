@@ -3,7 +3,7 @@ module RailsApp
     attr_reader :app_name, :assets, :styling, :database
 
     def initialize(app_name, args)
-      # puts "args: #{args}"
+      puts "args: #{args}"
       @app_name = app_name
       @assets = args[:assets]
       @bundling = args[:bundling]
@@ -26,10 +26,12 @@ module RailsApp
     end
 
     def run
+      ENV["BUNDLING"] = @bundling
+      ENV["STYLING"] = @styling
       command = "rails new #{@app_name} --no-rc #{skip_spring} #{skip_action_mailer} #{skip_action_mailbox} #{skip_action_text} #{skip_action_text} #{skip_action_cable} #{database_adapter} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} -m #{template}"
       command.squeeze!(" ")
       puts command
-      # system(command)
+      system(command)
     end
 
     def skip_spring

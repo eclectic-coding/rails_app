@@ -5,6 +5,7 @@ require "shellwords"
 
 puts "template: importmaps"
 puts "options: #{options}"
+puts "ENV: #{ENV["STYLING"]}"
 
 def add_template_to_source_path
   source_paths.unshift(File.expand_path(File.join(__dir__)))
@@ -22,10 +23,6 @@ def add_gems
   end
 
   directory "config", "config", force: true
-end
-
-def add_javascript
-
 end
 
 def add_users
@@ -69,18 +66,32 @@ def add_static
 end
 
 def add_styling
-  if options[:css] == "bootstrap"
-    rails_command("bin/importmap pin bootstrap")
-    directory "app_bootstrap", "app", force: true
-  elsif options[:css] == "tailwind"
+  if ENV["STYLING"] == "bootstrap"
+    run "bin/importmap pin bootstrap"
+    directory "app_bootstrap_importmap", "app", force: true
+    setup_importmap_bootstrap
+  elsif ENV["STYLING"] == "tailwind"
     config_tailwind
-  elsif options[:css] == "bulma"
+  elsif ENV["STYLING"] == "bulma"
     directory "app_bulma", "app", force: true
-  elsif options[:css] == "postcss"
+  elsif ENV["STYLING"] == "postcss"
     directory "app_postcss", "app", force: true
-  elsif options[:css] == "sass"
+  elsif ENV["STYLING"] == "sass"
     directory "app_sass", "app", force: true
   end
+end
+
+def setup_importmap_bootstrap
+  # add gems
+  inject_into_file "config/gems/app.rb", after: "gem \"devise\"\n" do
+    <<-CODE
+  gem "bootstrap", "~> 5.3"
+  gem "sassc-rails", "~> 2.1"
+    CODE
+  end
+  run "bundle install"
+
+  # remove old stylesheet
 end
 
 def config_tailwind
@@ -143,7 +154,6 @@ add_template_to_source_path
 add_gems
 
 after_bundle do
-  add_javascript
   add_users
   dev_tools
   add_static

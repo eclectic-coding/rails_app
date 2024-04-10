@@ -47,8 +47,7 @@ module RailsApp
         "postgresql"
       elsif @options.include?("mysql")
         "mysql"
-      elsif @options.include?("trilogy"
-      )
+      elsif @options.include?("trilogy")
         "trilogy"
       elsif @options.include?("oracle")
         "oracle"
