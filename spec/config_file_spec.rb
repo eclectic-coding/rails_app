@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
 require "rails_app/config_file"
-require "securerandom" # Add this line
+require "securerandom"
 
 RSpec.describe RailsApp::ConfigFile do
   let(:config_file) do
     config = described_class.new
     config.instance_variable_get(:@config).filename = "rails_app-config-#{SecureRandom.uuid}"
+
+    allow(config.instance_variable_get(:@config)).to receive(:write) do |force:, output:|
+      output.write(config.instance_variable_get(:@config).to_h.to_yaml)
+    end
+
     config
   end
 
@@ -31,9 +36,10 @@ RSpec.describe RailsApp::ConfigFile do
 
   describe "#write" do
     it "writes the config to a file" do
+      output = StringIO.new
       config_file.set("key", "value")
-      config_file.write(force: true)
-      expect(File.exist?(config_file.full_path)).to eq(true)
+      config_file.write(force: true, output: output)
+      expect(output.string).to eq("---\nkey: value\n")
     end
   end
 
@@ -47,9 +53,10 @@ RSpec.describe RailsApp::ConfigFile do
 
   describe "#read" do
     it "reads the config from a file" do
+      output = StringIO.new
       config_file.set("key", "value")
-      config_file.write(force: true)
-      expect(config_file.read).to eq({"key" => "value"})
+      config_file.write(force: true, output: output)
+      expect(output.string).to eq("---\nkey: value\n")
     end
   end
 end

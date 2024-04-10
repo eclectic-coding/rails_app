@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "yaml"
 require "tty-config"
 
 module RailsApp
@@ -19,8 +20,12 @@ module RailsApp
       @config.set(key, value: value)
     end
 
-    def write(force: false)
-      @config.write(force: force)
+    def write(force: false, output: nil)
+      if output
+        output.write(@config.to_h.to_yaml)
+      else
+        @config.write(force: force)
+      end
     end
 
     def full_path
