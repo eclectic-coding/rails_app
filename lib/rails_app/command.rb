@@ -69,7 +69,7 @@ module RailsApp
     end
 
     def asset_management
-      "-a propshaft" unless assets == "sprockets"
+      "-a propshaft" unless assets == "sprockets" || @styling == "bootstrap"
     end
 
     def styling_framework

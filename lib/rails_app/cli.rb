@@ -26,12 +26,8 @@ module RailsApp
     def self.menu(prompt, option_data = nil)
       # puts "option_data: #{option_data}"
       bundling = prompt.select("How would you like to manage bundling?", %w[esbuild importmap], default: option_data&.default_bundling)
-      assets = if bundling == "importmap"
-        "sprockets"
-      else
-        prompt.select("How would you like to manage assets?", %w[propshaft sprockets], default: option_data&.default_assets)
-      end
       styling = prompt.select("How would you like to manage styling?", %w[bootstrap tailwind bulma postcss sass], default: option_data&.default_styling)
+      assets = prompt.select("How would you like to manage assets?", %w[propshaft sprockets], default: option_data&.default_assets)
       database = prompt.select("Which database would you like to use?", %w[postgresql sqlite3 mysql trilogy oracle sqlserver jdbcmysql jdbcsqlite3 jdbcpostgresql jdbc], default: option_data&.default_database)
       skip_spring = prompt.yes?("Would you like to SKIP spring?", default: option_data&.default_action_mailer)
       action_mailer = prompt.yes?("Would you like to SKIP Action Mailer?", default: option_data&.default_action_mailer)

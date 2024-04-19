@@ -67,7 +67,6 @@ end
 
 def add_styling
   if ENV["STYLING"] == "bootstrap"
-    run "bin/importmap pin bootstrap"
     directory "app_bootstrap_importmap", "app", force: true
     setup_importmap_bootstrap
   elsif ENV["STYLING"] == "tailwind"
@@ -82,16 +81,23 @@ def add_styling
 end
 
 def setup_importmap_bootstrap
+  inject_into_file "config/initializers/assets.rb", after: "# Rails.application.config.assets.precompile += %w( admin.js admin.css )" do
+    "\nRails.application.config.assets.precompile += %w(bootstrap.min.js popper.js)"
+  end
+  append_to_file "config/importmap.rb" do
+    <<-CODE
+    pin "popper", to: "popper.js", preload: true
+    pin "bootstrap", to: "bootstrap.min.js", preload: true
+    CODE
+  end
   # add gems
   inject_into_file "config/gems/app.rb", after: "gem \"devise\"\n" do
-    <<-CODE
-  gem "bootstrap", "~> 5.3"
-  gem "sassc-rails", "~> 2.1"
-    CODE
+    "gem 'bootstrap', '~> 5.3'\ngem 'dartsass-sprockets'\n"
   end
   run "bundle install"
 
   # remove old stylesheet
+  remove_file "app/assets/stylesheets/application.css"
 end
 
 def config_tailwind
