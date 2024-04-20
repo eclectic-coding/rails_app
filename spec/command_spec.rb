@@ -5,9 +5,15 @@ require "rails_app/command"
 RSpec.describe RailsApp::Command do
   let(:args) { {assets: "sprockets", bundling: "esbuild", styling: "tailwindcss", database: "sqlite3"} }
   describe "#template" do
-    it "returns the path to the template file" do
+    it "returns the path to the template file if using esbuild" do
       command = RailsApp::Command.new("my_app", args)
       expect(command.template).to eq(File.expand_path("../lib/rails_app/template/template_esbuild.rb", __dir__))
+    end
+
+    it "returns the path to the template file" do
+      importmap_args = {assets: "sprockets", bundling: "importmap", styling: "bootstrap", database: "sqlite3"}
+      command = RailsApp::Command.new("my_app", importmap_args)
+      expect(command.template).to eq(File.expand_path("../lib/rails_app/template/template_importmaps.rb", __dir__))
     end
   end
 
