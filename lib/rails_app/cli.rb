@@ -36,7 +36,7 @@ module RailsApp
       action_storage = prompt.yes?("Would you like to SKIP Active Storage?", default: option_data&.default_action_storage)
       action_cable = prompt.yes?("Would you like to SKIP Active Cable?", default: option_data&.default_action_cable)
 
-      {assets: assets, styling: styling, bundling: bundling, database: database, skip_spring: skip_spring, action_mailer: action_mailer,
+      {bundling: bundling, styling: styling, assets: assets, database: database, skip_spring: skip_spring, action_mailer: action_mailer,
        action_mailbox: action_mailbox, action_text: action_text, action_storage: action_storage, action_cable: action_cable}
     end
 

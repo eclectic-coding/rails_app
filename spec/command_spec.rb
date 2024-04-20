@@ -96,9 +96,25 @@ RSpec.describe RailsApp::Command do
   end
 
   describe "#javascript_bundling" do
-    it "returns the javascript bundling option" do
-      command = RailsApp::Command.new("my_app", args)
-      expect(command.javascript_bundling).to eq("-j esbuild")
+    context "when the bundling is esbuild" do
+      it "returns the javascript bundling option" do
+        command = RailsApp::Command.new("my_app", args)
+        expect(command.javascript_bundling).to eq("-j esbuild")
+      end
+    end
+
+    context "when the bundling is importmap" do
+      it "returns the javascript bundling option" do
+        importmap_args = {assets: "sprockets", bundling: "importmap", styling: "tailwindcss", database: "sqlite3"}
+        command = RailsApp::Command.new("my_app", importmap_args)
+        expect(command.javascript_bundling).to be_nil
+      end
+
+      it "returns assets of sprockets if bootstrap is selected" do
+        importmap_propshaft = {assets: "propshaft", bundling: "importmap", styling: "bootstrap", database: "sqlite3"}
+        command = RailsApp::Command.new("my_app", importmap_propshaft)
+        expect(command.asset_management).to be_nil
+      end
     end
   end
 

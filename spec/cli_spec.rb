@@ -68,13 +68,13 @@ RSpec.describe RailsApp::CLI do
     end
 
     it "returns user selected options" do
-      allow(prompt).to receive(:select).and_return("propshaft", "esbuild", "bootstrap", "postgresql")
+      allow(prompt).to receive(:select).and_return("esbuild", "bootstrap", "propshaft", "postgresql")
       allow(prompt).to receive(:yes?).and_return(false)
 
       expected_options = {
-        assets: "propshaft",
-        styling: "bootstrap",
         bundling: "esbuild",
+        styling: "bootstrap",
+        assets: "propshaft",
         database: "postgresql",
         skip_spring: false,
         action_mailer: false,
