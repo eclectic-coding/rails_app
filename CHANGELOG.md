@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased](https://github.com/eclectic-coding/rails_app/tree/HEAD)
+
+[Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.9.0...HEAD)
+
+**Implemented enhancements:**
+
+- Add importmap option and set up bootstrap [\#32](https://github.com/eclectic-coding/rails_app/issues/32)
+
+**Merged pull requests:**
+
+- Add importmap select and bootstrap option [\#33](https://github.com/eclectic-coding/rails_app/pull/33) ([eclectic-coding](https://github.com/eclectic-coding))
+
 ## [0.9.0](https://github.com/eclectic-coding/rails_app/tree/0.9.0) (2024-04-09)
 
 [Full Changelog](https://github.com/eclectic-coding/rails_app/compare/0.8.1...0.9.0)
