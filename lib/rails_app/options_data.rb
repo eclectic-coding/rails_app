@@ -13,9 +13,17 @@ module RailsApp
     end
 
     def default_assets
-      # puts "@options: #{@options.include?("sprockets")}"
-
       @options.include?("sprockets") ? "sprockets" : "propshaft"
+    end
+
+    def default_bundling
+      if @options.include?("esbuild")
+        "esbuild"
+      elsif @options.include?("importmap")
+        "importmap"
+      else
+        "esbuild"
+      end
     end
 
     def default_styling

@@ -19,7 +19,7 @@ RSpec.describe RailsApp::CLI do
           allow(prompt).to receive(:yes?).and_return(true)
           allow(TTY::Prompt).to receive(:new).and_return(prompt)
           config_file = instance_double(RailsApp::ConfigFile)
-          allow(config_file).to receive(:read).and_return({"assets" => "propshaft", "styling" => "bootstrap", "database" => "postgresql"})
+          allow(config_file).to receive(:read).and_return({"assets" => "propshaft", "bundling" => "esbuild", "styling" => "bootstrap", "database" => "postgresql"})
           allow(RailsApp::ConfigFile).to receive(:new).and_return(config_file)
           options_data = instance_double(RailsApp::OptionsData)
           allow(options_data).to receive(:app_name).and_return("test_app")
@@ -27,8 +27,8 @@ RSpec.describe RailsApp::CLI do
         end
 
         it "creates an app with the existing configuration" do
-          expect(RailsApp::CLI).to receive(:create_app).with("test_app", {"assets" => "propshaft", "styling" => "bootstrap", "database" => "postgresql"})
-          RailsApp::CLI.start({"assets" => "propshaft", "styling" => "bootstrap", "database" => "postgresql"})
+          expect(RailsApp::CLI).to receive(:create_app).with("test_app", {"assets" => "propshaft", "bundling" => "esbuild", "styling" => "bootstrap", "database" => "postgresql"})
+          RailsApp::CLI.start({"assets" => "propshaft", "bundling" => "esbuild", "styling" => "bootstrap", "database" => "postgresql"})
         end
       end
 
@@ -68,12 +68,13 @@ RSpec.describe RailsApp::CLI do
     end
 
     it "returns user selected options" do
-      allow(prompt).to receive(:select).and_return("propshaft", "bootstrap", "postgresql")
+      allow(prompt).to receive(:select).and_return("esbuild", "bootstrap", "propshaft", "postgresql")
       allow(prompt).to receive(:yes?).and_return(false)
 
       expected_options = {
-        assets: "propshaft",
+        bundling: "esbuild",
         styling: "bootstrap",
+        assets: "propshaft",
         database: "postgresql",
         skip_spring: false,
         action_mailer: false,

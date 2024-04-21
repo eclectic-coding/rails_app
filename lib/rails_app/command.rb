@@ -3,9 +3,10 @@ module RailsApp
     attr_reader :app_name, :assets, :styling, :database
 
     def initialize(app_name, args)
-      # puts "args: #{args}"
+      puts "args: #{args}"
       @app_name = app_name
       @assets = args[:assets]
+      @bundling = args[:bundling]
       @styling = args[:styling]
       @database = args[:database]
       @skip_spring = args[:skip_spring]
@@ -17,13 +18,19 @@ module RailsApp
     end
 
     def template
-      File.join(__dir__, "template", "template.rb")
+      if @bundling == "esbuild"
+        File.join(__dir__, "template", "template_esbuild.rb")
+      else
+        File.join(__dir__, "template", "template_importmaps.rb")
+      end
     end
 
     def run
+      ENV["BUNDLING"] = @bundling
+      ENV["STYLING"] = @styling
       command = "rails new #{@app_name} --no-rc #{skip_spring} #{skip_action_mailer} #{skip_action_mailbox} #{skip_action_text} #{skip_action_text} #{skip_action_cable} #{database_adapter} #{asset_management} #{javascript_bundling} #{styling_framework} #{testing_framework} -m #{template}"
       command.squeeze!(" ")
-      # puts command
+      puts command
       system(command)
     end
 
@@ -56,14 +63,18 @@ module RailsApp
     end
 
     def javascript_bundling
-      "-j esbuild"
+      if @bundling != "importmap"
+        "-j #{@bundling}"
+      end
     end
 
     def asset_management
-      "-a propshaft" unless assets == "sprockets"
+      "-a propshaft" unless assets == "sprockets" || @styling == "bootstrap"
     end
 
     def styling_framework
+      return if @bundling == "importmap"
+
       "--css #{@styling}"
     end
 
